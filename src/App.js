@@ -1,17 +1,9 @@
-import AppBar from '@mui/material/AppBar';
-import Toolbar from '@mui/material/Toolbar';
-import Button from '@mui/material/Button';
-import Stack from '@mui/material/Stack';
-import Typography from '@mui/material/Typography';
+import Navbar from './components/Navbar';
 
 function App() {
   return (
     <div>
-      <AppBar position='fixed'>
-        <Toolbar>
-          <Typography>Welcome to my page</Typography>
-        </Toolbar>
-      </AppBar>
+      <Navbar/>
     </div>
   );
 }
