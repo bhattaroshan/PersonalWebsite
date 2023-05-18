@@ -64,6 +64,7 @@ function Navbar(){
             setAnchorEl(e.currentTarget);
         }else{ //need to push to navigator
             navigate(v.url);
+            setMenuOpen(false);
         }
     }
 
@@ -116,7 +117,7 @@ function Navbar(){
                     onClose={closeDrawer}>
                         {
                             menuItems.map((value,index)=>{
-                                return <MenuDropDown value={value} key={index}/>
+                                return <MenuDropDown value={value} key={index} closeDrawer={closeDrawer}/>
                             })
                         }
             </Drawer>
