@@ -1,6 +1,8 @@
 import Navbar from './components/Navbar';
 import {createTheme,ThemeProvider} from '@mui/material/styles';
-import Map from './components/Map';
+import TravelPage from './pages/TravelPage';
+import {BrowserRouter, Route, Routes} from 'react-router-dom';
+import HomePage from '../src/pages/HomePage';
 
 const theme = createTheme({
   palette:{
@@ -15,11 +17,15 @@ const theme = createTheme({
 
 function App() {
   return (
-    <ThemeProvider theme={theme}>
-      <Navbar/>
-      <h1>Travels</h1>
-      <Map/>
-    </ThemeProvider>
+    <BrowserRouter>
+      <ThemeProvider theme={theme}>
+        <Navbar/>
+        <Routes>
+          <Route exact path="/" element={<HomePage/>}/>
+          <Route path="travel" element={<TravelPage/>}/>  
+        </Routes>
+      </ThemeProvider>
+    </BrowserRouter>
   );
 }
 

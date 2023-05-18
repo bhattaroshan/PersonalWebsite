@@ -7,7 +7,8 @@ import {
     TileLayer,
     useMap,
     Marker,
-    Popup
+    Popup,
+    Circle
   } from 'react-leaflet';
 
 function Map() {
@@ -24,11 +25,17 @@ function Map() {
         />
         {
             markers.map((v,i)=>{
-                return <Marker key={i} position={v} style={{color:'red'}}>
-                        <Popup>
-                            <Button>Test</Button>
-                        </Popup>
-                    </Marker>
+                // return <Marker key={i} position={v} style={{color:'red'}}>
+                //         <Popup>
+                //             <Button>Test</Button>
+                //         </Popup>
+                //         <Circle center={v} pathOptions={{ fillColor: 'green',color: 'green' }} radius={1000} />
+                //     </Marker>
+                return <Circle key={i} center={v} pathOptions={{ fillColor: 'red',color: 'red' }} radius={8000} >
+                    <Popup>
+                        Hello there
+                    </Popup>
+                    </Circle>
             })
         }
       
