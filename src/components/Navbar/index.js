@@ -70,7 +70,7 @@ function Navbar(){
   
 
     return (
-        <AppBar>
+        <AppBar position="sticky" sx={{margin:0, padding:0}}>
             <Toolbar>
                 <Grid container sx={{display:'flex'}}>
                     <Grid item sx={{display:'flex', alignItems:'center', flexGrow:"1"}}>
