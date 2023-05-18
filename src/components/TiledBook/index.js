@@ -9,7 +9,7 @@ import {Button} from '@mui/material';
 
 function TiledBook({name,author,img}) {
     return (
-      <Card sx={{ display: 'flex', maxWidth: "400px"}}> 
+      <Card sx={{ display: 'flex', width: "400px"}}> 
       <CardMedia
           component="img"
           sx={{ width: 151, maxHeight: 230}}
