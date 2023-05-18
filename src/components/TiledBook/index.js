@@ -12,7 +12,7 @@ function TiledBook({name,author,img,rating}) {
       <Card sx={{ display: 'flex', width: "400px"}}> 
       <CardMedia
           component="img"
-          sx={{ width: 151, maxHeight: 230}}
+          sx={{ width: 151, maxHeight: 220, borderTopRightRadius: '5px', borderBottomRightRadius: '5px'}}
           image={img}
           alt={name}
         />

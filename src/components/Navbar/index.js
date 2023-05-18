@@ -38,6 +38,11 @@ const menuItems = [
         ]
     },
     {
+        name: 'PORTFOLIO',
+        url: 'portfolio',
+        icon: ''
+    },
+    {
         name: 'BLOGS',
         url: 'blogs',
         icon: ''
