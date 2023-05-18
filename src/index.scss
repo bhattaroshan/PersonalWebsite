@@ -5,6 +5,10 @@
 }
 
 .leaflet-container{
-    height: 60vh;
-    width: 80vw;
+    height: 70vh;
+    width: 100vw;
+}
+
+.leaflet-control-attribution{
+    display:none !important;
 }
