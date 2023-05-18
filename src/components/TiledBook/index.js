@@ -4,10 +4,10 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
-import {Button} from '@mui/material';
+import {Button,Rating} from '@mui/material';
 
 
-function TiledBook({name,author,img}) {
+function TiledBook({name,author,img,rating}) {
     return (
       <Card sx={{ display: 'flex', width: "400px"}}> 
       <CardMedia
@@ -24,6 +24,7 @@ function TiledBook({name,author,img}) {
             <Typography variant="subtitle3" color="text.secondary" component="div">
                 {author}
             </Typography>
+            <Rating name="read-only" value={rating} size="small" readOnly sx={{mt:'10px'}} precision={0.5}/>
           </CardContent>
           <Box sx={{ display: 'flex', justifyContent:'center', alignItems: 'center', pl: 1, pb: 1 }}>
             <Button variant="contained" sx={{borderRadius: "20px", minWidth:"120px", 
