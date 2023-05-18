@@ -1,11 +1,12 @@
 import { useState } from 'react';
 import {AppBar,Toolbar,Grid,Tab,Tabs,Menu,MenuItem,Avatar,Drawer,List,
-        ListItem,Box,IconButton,ListItemButton,Collapse} from '@mui/material';
+        ListItem,Box,IconButton,ListItemButton,Collapse,Typography} from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import useDisclosure from '../../hooks/useDisclosure';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 
 import './style.scss';
+import MenuDropDown from '../MenuDropDown';
 
 const menuItems = [
     {
@@ -56,28 +57,17 @@ function Navbar(){
     const [navIndex,setNavIndex] = useState(0);
     const [anchorEl,setAnchorEl] = useState();
     const [menuOpen,setMenuOpen] = useState(false);
-    const [subMenuBoolean,setSubMenuBoolen] = useState(Array(menuItems.length).fill(false));
 
     const {isOpen:isDrawerOpen,close:closeDrawer,toggle:toggleDrawer,open:openDrawer} = useDisclosure();
 
-    function flipSubMenuArray(index){
-        setSubMenuBoolen(prevArray=>{
-            const newArr = [...prevArray];
-            newArr[index] = !newArr[index];
-            return newArr;
-        });
-    }
-
+  
     function handleMenuOpen(e){
         setMenuOpen(true);
         setAnchorEl(e.currentTarget);
+        console.log(e.currentTarget);
     }
 
-    function handleDropMenu(value,index){
-        if(value.hasOwnProperty("submenu")){
-            flipSubMenuArray(index);
-        }
-    }
+  
 
     return (
         <AppBar>
@@ -91,7 +81,9 @@ function Navbar(){
                               onChange={(e,v)=>setNavIndex(v)} >
                             {
                                 menuItems.map((value,index)=>{
-                                    return <Tab label={value.name}
+                                    return <Tab label={
+                                        <Typography>{value.name}</Typography>
+                                    }
                                             onClick={value.submenu?handleMenuOpen:null} 
                                             key={index}
                                             />
@@ -111,8 +103,7 @@ function Navbar(){
 
             <Menu id='menu' anchorEl={anchorEl} open={menuOpen} onClose={()=>setMenuOpen(false)} className="menu">
                 {
-                    menuItems[navIndex].submenu &&
-                    menuItems[navIndex].submenu.map((v,i)=>{
+                    menuItems[navIndex].submenu?.map((v,i)=>{
                         return <MenuItem key={i} className="menuitem">
                             {v.name}
                         </MenuItem>
@@ -125,31 +116,7 @@ function Navbar(){
                     onClose={closeDrawer}>
                         {
                             menuItems.map((value,index)=>{
-                                return <div key={index}>
-                                    <List className="drawer">
-                                            <ListItemButton onClick={()=>handleDropMenu(value,index)}>
-                                                {value.name}
-                                                {
-                                                    value.submenu &&
-                                                    <KeyboardArrowDownIcon/>
-                                                }
-                                            </ListItemButton>
-                                        </List>
-                                        {
-                                            value.submenu &&
-                                            <Collapse in={subMenuBoolean[index]} timeout='auto' unmountOnExit>
-                                                <List>
-                                                    {
-                                                        value.submenu.map((v,i)=>{
-                                                            return <ListItemButton key={index*10+i}>
-                                                                    {v.name}
-                                                                </ListItemButton>
-                                                        })
-                                                    }
-                                                </List>
-                                            </Collapse>
-                                        }
-                                        </div>
+                                return <MenuDropDown value={value} key={index}/>
                             })
                         }
             </Drawer>
