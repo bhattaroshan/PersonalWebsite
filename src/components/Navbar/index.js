@@ -11,7 +11,12 @@ const menuItems = [
     {
         name: 'HOME',
         url: '',
-        icon: ''
+        icon: '',
+        submenu:[
+            {
+                name:'test',
+            }
+        ]
     },
     {
         name: 'EXPERIENCE',
@@ -51,21 +56,27 @@ function Navbar(){
     const [navIndex,setNavIndex] = useState(0);
     const [anchorEl,setAnchorEl] = useState();
     const [menuOpen,setMenuOpen] = useState(false);
+    const [subMenuBoolean,setSubMenuBoolen] = useState(Array(menuItems.length).fill(false));
 
-    const {isOpen,close,toggle,open} = useDisclosure();
-    const {isOpen:drawerOpen,close:closeDrawer,toggle:toggleDrawer,open:openDrawer} = useDisclosure();
+    const {isOpen:isDrawerOpen,close:closeDrawer,toggle:toggleDrawer,open:openDrawer} = useDisclosure();
+
+    function flipSubMenuArray(index){
+        setSubMenuBoolen(prevArray=>{
+            const newArr = [...prevArray];
+            newArr[index] = !newArr[index];
+            return newArr;
+        });
+    }
 
     function handleMenuOpen(e){
         setMenuOpen(true);
         setAnchorEl(e.currentTarget);
     }
 
-    function handleMenuClose(e){
-        setMenuOpen(false);
-    }
-
-    function handleDropMenu(e){
-
+    function handleDropMenu(value,index){
+        if(value.hasOwnProperty("submenu")){
+            flipSubMenuArray(index);
+        }
     }
 
     return (
@@ -82,6 +93,7 @@ function Navbar(){
                                 menuItems.map((value,index)=>{
                                     return <Tab label={value.name}
                                             onClick={value.submenu?handleMenuOpen:null} 
+                                            key={index}
                                             />
                                 })
                             }
@@ -89,7 +101,7 @@ function Navbar(){
                     </Grid>
                     <Grid item sx={{display:{xs:'flex',md:'none'}, alignItems:'center'}}>
                         <IconButton 
-                            onClick={open}
+                            onClick={openDrawer}
                             sx={{color:"white"}}>
                             <MenuIcon/>
                         </IconButton>
@@ -97,27 +109,25 @@ function Navbar(){
                 </Grid>
             </Toolbar>
 
-            <Menu id='menu' anchorEl={anchorEl} open={menuOpen} onClose={handleMenuClose} className="menu">
+            <Menu id='menu' anchorEl={anchorEl} open={menuOpen} onClose={()=>setMenuOpen(false)} className="menu">
                 {
-                    menuItems.map((value,index)=>{
-                        return value.submenu?
-                        value.submenu.map((v,i)=>{
-                            return <MenuItem key={i} className="menuitem">{v.name}</MenuItem>
-                        }):null
+                    menuItems[navIndex].submenu &&
+                    menuItems[navIndex].submenu.map((v,i)=>{
+                        return <MenuItem key={i} className="menuitem">
+                            {v.name}
+                        </MenuItem>
                     })
                 }
             </Menu>
 
             <Drawer anchor="right"
-                    open={isOpen}
-                    onClose={close}>
-                <Box >
-                    <List>
+                    open={isDrawerOpen}
+                    onClose={closeDrawer}>
                         {
                             menuItems.map((value,index)=>{
-                                return <>
+                                return <div key={index}>
                                     <List className="drawer">
-                                            <ListItemButton onClick={handleDropMenu}>
+                                            <ListItemButton onClick={()=>handleDropMenu(value,index)}>
                                                 {value.name}
                                                 {
                                                     value.submenu &&
@@ -127,21 +137,21 @@ function Navbar(){
                                         </List>
                                         {
                                             value.submenu &&
-                                            <Collapse in={drawerOpen} timeout='auto' unmountOnExit>
+                                            <Collapse in={subMenuBoolean[index]} timeout='auto' unmountOnExit>
                                                 <List>
                                                     {
                                                         value.submenu.map((v,i)=>{
-                                                            return <ListItemButton>{v.name}</ListItemButton>
+                                                            return <ListItemButton key={index*10+i}>
+                                                                    {v.name}
+                                                                </ListItemButton>
                                                         })
                                                     }
                                                 </List>
                                             </Collapse>
                                         }
-                                        </>
+                                        </div>
                             })
                         }
-                    </List>
-                </Box>
             </Drawer>
         </AppBar>
     );
