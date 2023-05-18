@@ -18,7 +18,7 @@ import { Flag } from '@mui/icons-material';
 function Map() {
  
     return (
-        <MapContainer center={travelPlaces[0].latlong} zoom={7} scrollWheelZoom={true}> 
+        <MapContainer center={travelPlaces[0].latlong} zoom={3} scrollWheelZoom={true}> 
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -31,14 +31,12 @@ function Map() {
                 //         </Popup>
                 //         <Circle center={v} pathOptions={{ fillColor: 'green',color: 'green' }} radius={1000} />
                 //     </Marker>
-                return <Box sx={{bgcolor:'red'}}>
-                    <Circle key={i} center={v.latlong} pathOptions={{ fillColor: 'red',color: 'red' }} radius={8000}>
+                return <Circle key={i} center={v.latlong} pathOptions={{ fillColor: 'red',color: 'red' }} radius={8000}>
                         <Popup>
                             {v.place}
                         </Popup>
                         </Circle>
 
-                </Box>
             })
         }
       

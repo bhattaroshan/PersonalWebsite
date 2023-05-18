@@ -11,6 +11,10 @@ const travelPlaces = [
         {
             latlong:[27.5115864,86.5822882], //salleri
             place: 'Salleri, Solukhumbu'
+        },
+        {
+            latlong:[-7.7975928,110.36945], //yogjakarta,indonesia
+            place: 'Yogjakarta, Indonesia'
         }
 ];
 
