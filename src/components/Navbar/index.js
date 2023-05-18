@@ -13,11 +13,6 @@ const menuItems = [
         name: 'HOME',
         url: '',
         icon: '',
-        submenu:[
-            {
-                name:'test',
-            }
-        ]
     },
     {
         name: 'EXPERIENCE',
