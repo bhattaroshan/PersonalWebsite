@@ -4,6 +4,7 @@ import {AppBar,Toolbar,Grid,Tab,Tabs,Menu,MenuItem,Avatar,Drawer,List,
 import MenuIcon from '@mui/icons-material/Menu';
 import useDisclosure from '../../hooks/useDisclosure';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+import {useNavigate} from 'react-router-dom';
 
 import './style.scss';
 import MenuDropDown from '../MenuDropDown';
@@ -11,7 +12,7 @@ import MenuDropDown from '../MenuDropDown';
 const menuItems = [
     {
         name: 'HOME',
-        url: '',
+        url: '/',
         icon: '',
     },
     {
@@ -21,34 +22,35 @@ const menuItems = [
         submenu:[
             {
                 name: 'ACADEMICS',
-                url: '',
+                url: 'academics',
                 icon: '',
             },
             {
                 name: 'BOOKS',
-                url: '',
+                url: 'books',
                 icon: '',
             },
             {
                 name: 'TRAVEL',
-                url: '',
+                url: 'travel',
                 icon: '',
             },
         ]
     },
     {
         name: 'BLOGS',
-        url: '',
+        url: 'blogs',
         icon: ''
     },
     {
         name: 'CONTACT ME',
-        url: '',
+        url: 'contactme',
         icon: ''
     }
 ]
 
 function Navbar(){
+    const navigate = useNavigate();
     const [navIndex,setNavIndex] = useState(0);
     const [anchorEl,setAnchorEl] = useState();
     const [menuOpen,setMenuOpen] = useState(false);
@@ -56,10 +58,13 @@ function Navbar(){
     const {isOpen:isDrawerOpen,close:closeDrawer,toggle:toggleDrawer,open:openDrawer} = useDisclosure();
 
   
-    function handleMenuOpen(e){
-        setMenuOpen(true);
-        setAnchorEl(e.currentTarget);
-        console.log(e.currentTarget);
+    function handleMenuOpen(e,v){
+        if(v.submenu!==undefined){
+            setMenuOpen(true);
+            setAnchorEl(e.currentTarget);
+        }else{ //need to push to navigator
+            navigate(v.url);
+        }
     }
 
   
@@ -79,7 +84,7 @@ function Navbar(){
                                     return <Tab label={
                                         <Typography>{value.name}</Typography>
                                     }
-                                            onClick={value.submenu?handleMenuOpen:null} 
+                                            onClick={(e)=>handleMenuOpen(e,value)} 
                                             key={index}
                                             />
                                 })
@@ -99,8 +104,8 @@ function Navbar(){
             <Menu id='menu' anchorEl={anchorEl} open={menuOpen} onClose={()=>setMenuOpen(false)} className="menu">
                 {
                     menuItems[navIndex].submenu?.map((v,i)=>{
-                        return <MenuItem key={i} className="menuitem">
-                            {v.name}
+                        return <MenuItem key={i} className="menuitem" onClick={(e)=>handleMenuOpen(e,v)}>
+                            <Typography>{v.name}</Typography>
                         </MenuItem>
                     })
                 }
