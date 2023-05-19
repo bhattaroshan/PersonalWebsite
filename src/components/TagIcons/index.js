@@ -129,7 +129,6 @@ function TagIcons({style,icons}) {
     }
 
     function handleDragStop(){
-        console.log("drag stopped");
     }
 
     return (<Box sx={{overflow:'hidden', display:'flex',maxWidth:'80%'}} ref={frameRef}>
@@ -142,6 +141,7 @@ function TagIcons({style,icons}) {
                                         onMouseOver={(e)=>handleMouseOver(e,v,i)}
                                         onMouseLeave={(e)=>handleMouseLeave(e,v,i)}
                                         onClick={(e)=>handleMouseClick(e,v,i)}
+                                        onTouchStart={(e)=>handleMouseClick(e,v,i)}
                                         >
                                     <Icon sx={{fontSize:'40px'}}>
                                         {currentIcons[i]}
