@@ -1,15 +1,28 @@
-import React,{useState,useEffect} from 'react'
+import React,{useState,useEffect,useRef} from 'react'
 import {Box, Typography,Icon} from '@mui/material';
 import BusinessCenterIcon from '@mui/icons-material/BusinessCenter';
+import {useTheme } from '@mui/material/styles';
+import Slider from "react-slick";
 
 import './style.scss';
 
 function TagIcons({style,icons}) {
-
+    const theme = useTheme();
+    const moveRef = useRef();
     const [currentIcons,setCurrentIcon] = useState(Array(icons.length).fill(null));
     const [clickedIcons, setClickedIcons] = useState(Array(icons.length).fill(false));
     const [hoveredIcons, setHoveredIcons] = useState(Array(icons.length).fill('none'));
-    
+    const [swipeValue, setSwipeValue] = React.useState(0);
+    const [mousePos,setMousePos] = useState({x:0,y:0});
+    const [mouseDown,setMouseDown] = useState(false);
+    var settings = {
+        dots: true,
+        infinite: true,
+        speed: 500,
+        slidesToShow: 1,
+        slidesToScroll: 1
+      };
+
     useEffect(()=>{
         setIconState(0,true);
 
@@ -64,25 +77,63 @@ function TagIcons({style,icons}) {
         setHoveredIcons(hIcons);
     }
 
-    return (
-        <Box sx={style}>
-            {
-                icons.map((v,i)=>{
-                    return <Box key={i} sx={{display:'flex', flexDirection:'column', marginRight:'35px',  marginLeft: '35px',
-                                    cursor:'pointer', alignItems:"center"}} 
-                                    onMouseOver={(e)=>handleMouseOver(e,v,i)}
-                                    onMouseLeave={(e)=>handleMouseLeave(e,v,i)}
-                                    onClick={(e)=>handleMouseClick(e,v,i)}
-                                    >
-                                <Icon sx={{fontSize:'40px'}}>
-                                    {currentIcons[i]}
-                                </Icon>
-                                <Typography sx={{fontWeight:clickedIcons[i]?"bold":"light"}}>{v.title}</Typography>
-                                <span className="tag_icons_horizontal_line" style={{visibility:hoveredIcons[i]}}/>
-                            </Box>
-                })
+    function handleMouseDown(e){
+        const x = e.clientX;
+        const y = e.clientY;
+        setMousePos({x:x,y:y});
+        setMouseDown(true);
+    }
+
+    function handleMouseUp(e){
+        const x = e.clientX;
+        const y = e.clientY;
+        const deltaX = (mousePos.x-x); //if +ve left slide
+        const deltaY = (mousePos.y-y);
+        setMouseDown(false);
+    }
+
+    function handleMouseMove(e){
+        if(mouseDown===true){ //dragging has started
+            const element = moveRef.current;
+            const x = e.clientX;
+            const y = e.clientY;
+            const deltaX = -(mousePos.x-x); //if +ve left slide
+            const deltaY = -(mousePos.y-y);
+            if(element){
+                if(deltaX<=0){
+                    element.style.transform=`translate(${deltaX}px,0)`;
+                }
             }
-        </Box>
+        }
+    }
+
+    return (
+            <Box sx={{display:'flex', width:'100%', justifyContent:'center'}}>
+            <Box sx={style} className='scrollable_tabs'
+                onMouseDown={(e)=>handleMouseDown(e)} 
+                onMouseUp={(e)=>handleMouseUp(e)}
+                onMouseMove={(e)=>handleMouseMove(e)}
+                ref={moveRef}
+                style={{gap:'70px', overflowX:'hidden'}}
+            >
+                {
+                    icons.map((v,i)=>{
+                        return <Box key={i} sx={{display:'flex', flexDirection:'column',
+                                        cursor:'pointer', alignItems:"center"}} 
+                                        onMouseOver={(e)=>handleMouseOver(e,v,i)}
+                                        onMouseLeave={(e)=>handleMouseLeave(e,v,i)}
+                                        onClick={(e)=>handleMouseClick(e,v,i)}
+                                        >
+                                    <Icon sx={{fontSize:'40px'}}>
+                                        {currentIcons[i]}
+                                    </Icon>
+                                    <Typography sx={{fontWeight:clickedIcons[i]?"bold":"light"}}>{v.title}</Typography>
+                                    <span className="tag_icons_horizontal_line" style={{visibility:hoveredIcons[i]}}/>
+                                </Box>
+                    })
+                }
+            </Box>
+            </Box>
     )
 }
 
