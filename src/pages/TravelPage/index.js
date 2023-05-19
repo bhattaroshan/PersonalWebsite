@@ -24,6 +24,31 @@ const travelIcons = [
     clickedIcon:<DriveEtaIcon/>,
     title:"Drive"
   },
+  {
+    defaultIcon:<DriveEtaOutlinedIcon/>,
+    clickedIcon:<DriveEtaIcon/>,
+    title:"Drive"
+  },
+  {
+    defaultIcon:<DriveEtaOutlinedIcon/>,
+    clickedIcon:<DriveEtaIcon/>,
+    title:"Drive"
+  },
+  {
+    defaultIcon:<DriveEtaOutlinedIcon/>,
+    clickedIcon:<DriveEtaIcon/>,
+    title:"Drive"
+  },
+  {
+    defaultIcon:<DriveEtaOutlinedIcon/>,
+    clickedIcon:<DriveEtaIcon/>,
+    title:"Drive"
+  },
+  {
+    defaultIcon:<DriveEtaOutlinedIcon/>,
+    clickedIcon:<DriveEtaIcon/>,
+    title:"Drive"
+  },
 ]
 
 function TravelPage() {

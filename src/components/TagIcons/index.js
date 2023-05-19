@@ -8,6 +8,7 @@ function TagIcons({style,icons}) {
 
     const [currentIcons,setCurrentIcon] = useState(Array(icons.length).fill(null));
     const [clickedIcons, setClickedIcons] = useState(Array(icons.length).fill(false));
+    const [hoveredIcons, setHoveredIcons] = useState(Array(icons.length).fill('none'));
     
     useEffect(()=>{
         setIconState(0,true);
@@ -52,10 +53,15 @@ function TagIcons({style,icons}) {
     }
 
     function handleMouseOver(e,v,i){
-        
+        const hIcons = [...hoveredIcons]; 
+        hIcons[i] = 'visible';
+        setHoveredIcons(hIcons);
     }
 
     function handleMouseLeave(e,v,i){
+        const hIcons = [...hoveredIcons]; 
+        hIcons[i] = 'hidden';
+        setHoveredIcons(hIcons);
     }
 
     return (
@@ -72,7 +78,7 @@ function TagIcons({style,icons}) {
                                     {currentIcons[i]}
                                 </Icon>
                                 <Typography sx={{fontWeight:clickedIcons[i]?"bold":"light"}}>{v.title}</Typography>
-                                <span className="tag_icons_horizontal_line"/>
+                                <span className="tag_icons_horizontal_line" style={{visibility:hoveredIcons[i]}}/>
                             </Box>
                 })
             }
