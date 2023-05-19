@@ -27,8 +27,8 @@ function TiledBook({name,author,img,rating}) {
             <Rating name="read-only" value={rating} size="small" readOnly sx={{mt:'10px'}} precision={0.5}/>
           </CardContent>
           <Box sx={{ display: 'flex', justifyContent:'center', alignItems: 'center', pl: 1, pb: 1 }}>
-            <Button variant="contained" sx={{borderRadius: "20px", minWidth:"120px", 
-                    textTransform:'none', backgroundColor:'#404040'}} 
+            <Button variant="outlined" sx={{borderRadius: "20px", minWidth:"120px", 
+                    textTransform:'none'}} 
                     disableElevation>
                 Review
             </Button>
