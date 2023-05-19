@@ -2,26 +2,23 @@ import React,{useState,useEffect,useRef} from 'react'
 import {Box, Typography,Icon} from '@mui/material';
 import BusinessCenterIcon from '@mui/icons-material/BusinessCenter';
 import {useTheme } from '@mui/material/styles';
-import Slider from "react-slick";
+import Draggable from 'react-draggable'; // The default
 
 import './style.scss';
+import { Translate } from '@mui/icons-material';
 
 function TagIcons({style,icons}) {
     const theme = useTheme();
-    const moveRef = useRef();
+    const frameRef = useRef();
+    const iconRef = useRef();
     const [currentIcons,setCurrentIcon] = useState(Array(icons.length).fill(null));
     const [clickedIcons, setClickedIcons] = useState(Array(icons.length).fill(false));
     const [hoveredIcons, setHoveredIcons] = useState(Array(icons.length).fill('none'));
     const [swipeValue, setSwipeValue] = React.useState(0);
     const [mousePos,setMousePos] = useState({x:0,y:0});
     const [mouseDown,setMouseDown] = useState(false);
-    var settings = {
-        dots: true,
-        infinite: true,
-        speed: 500,
-        slidesToShow: 1,
-        slidesToScroll: 1
-      };
+
+    const [dragPosition,setDragPosition] = useState({x:0,y:0});
 
     useEffect(()=>{
         setIconState(0,true);
@@ -78,7 +75,6 @@ function TagIcons({style,icons}) {
     }
 
     function handleMouseDown(e){
-        console.log("here we go boys");
         const x = e.clientX;
         const y = e.clientY;
         setMousePos({x:x,y:y});
@@ -108,21 +104,37 @@ function TagIcons({style,icons}) {
         }
     }
 
-    return (
-            <Box sx={{display:'flex', width:'100%', justifyContent:'center'}}>
-            <Box sx={style} className='scrollable_tabs'
-                onMouseDown={(e)=>handleMouseDown(e)} 
-                onMouseUp={(e)=>handleMouseUp(e)}
-                onMouseMove={(e)=>handleMouseMove(e)}
-                onTouchStart={(e)=>handleMouseDown(e)}
-                onTouchEnd={(e)=>handleMouseUp(e)}
-                onTouchMove={(e)=>handleMouseMove(e)}
+    function handleOnDrag(e,data){
+        console.log("dragging right now");
+        const frameLeft = frameRef.current.getBoundingClientRect().left;
+        const frameRight = frameRef.current.getBoundingClientRect().right;
+        const iconLeft = iconRef.current.getBoundingClientRect().left;
+        const iconRight = iconRef.current.getBoundingClientRect().right;
 
+        const frameWidth = frameRight-frameLeft;
+        const iconWidth = iconRight-iconLeft;
+        let rem = 0;
+        if(frameWidth>iconWidth){
+            rem = iconWidth-frameWidth;
+        }
 
+        if(iconLeft>frameLeft){
+            setDragPosition({x:0,y:0});
+        }else if(iconRight<frameRight){
+            setDragPosition({x:frameWidth-iconWidth-rem,y:0})
+        }
+        else{
+            setDragPosition({x:data.x,y:0});
+        }
+    }
 
-                ref={moveRef}
-                style={{gap:'70px', overflowX:'hidden'}}
-            >
+    function handleDragStop(){
+        console.log("drag stopped");
+    }
+
+    return (<Box sx={{overflow:'hidden', display:'flex',maxWidth:'80%'}} ref={frameRef}>
+                <Draggable axis='x' onDrag={handleOnDrag} onStop={handleDragStop} position={dragPosition}>
+                <Box sx={style} style={{gap:'70px'}} ref={iconRef}>
                 {
                     icons.map((v,i)=>{
                         return <Box key={i} sx={{display:'flex', flexDirection:'column',
@@ -139,8 +151,9 @@ function TagIcons({style,icons}) {
                                 </Box>
                     })
                 }
-            </Box>
-            </Box>
+                </Box>
+                </Draggable>
+             </Box>
     )
 }
 
