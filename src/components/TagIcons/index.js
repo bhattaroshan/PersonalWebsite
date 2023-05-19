@@ -78,6 +78,7 @@ function TagIcons({style,icons}) {
     }
 
     function handleMouseDown(e){
+        console.log("here we go boys");
         const x = e.clientX;
         const y = e.clientY;
         setMousePos({x:x,y:y});
@@ -113,6 +114,12 @@ function TagIcons({style,icons}) {
                 onMouseDown={(e)=>handleMouseDown(e)} 
                 onMouseUp={(e)=>handleMouseUp(e)}
                 onMouseMove={(e)=>handleMouseMove(e)}
+                onTouchStart={(e)=>handleMouseDown(e)}
+                onTouchEnd={(e)=>handleMouseUp(e)}
+                onTouchMove={(e)=>handleMouseMove(e)}
+
+
+
                 ref={moveRef}
                 style={{gap:'70px', overflowX:'hidden'}}
             >
