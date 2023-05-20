@@ -13,17 +13,17 @@ function HomePage() {
             const numNodes = 10;
             let categories = [
                 "Food","Travel","Books","Drive","Passion","Educator",
-                "Programmer","Engineer","Music","Curious"
+                "Coder","?","Music","Curious"
             ];
 
             class Node {
                 constructor(x, y,i) {
                   this.x = x;
                   this.y = y;
-                  this.radius = 70;
+                  this.radius = 55;
                   this.speedX = p.random(-2, 2);
                   this.speedY = p.random(-2, 2);
-                  this.color = p.color(p.random(0,50), p.random(50,100), p.random(100,200));
+                  this.color = p.color(p.random(0,50), p.random(50,100), p.random(100,200),70);
                   this.text = categories[i];
                 }
 
@@ -32,7 +32,11 @@ function HomePage() {
                     p.noStroke();
                     p.ellipse(this.x, this.y, this.radius);
                     p.fill(200,200,200);
-                    p.textSize(12);
+                    if(this.text==="?"){
+                        p.textSize(25);
+                    }else{
+                        p.textSize(12);
+                    }
                     p.textAlign(p.CENTER,p.CENTER);
                     p.text(this.text,this.x,this.y);
                   }
@@ -96,7 +100,7 @@ function HomePage() {
                         }
                         const forceDist = 300;
                         if (d < forceDist) {
-                        p.stroke(50,50,100);
+                        p.stroke(50,50,100,80);
                         p.strokeWeight(((forceDist-d)*4)/forceDist);
                         p.line(nodeA.x, nodeA.y, nodeB.x, nodeB.y);
                         }
