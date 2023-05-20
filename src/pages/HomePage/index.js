@@ -1,7 +1,9 @@
 import React,{useRef,useEffect,useState} from 'react'
 import p5 from 'p5';
+import {useNavigate} from 'react-router-dom';
 
 function HomePage() {
+    const navigate = useNavigate();
     const sketchRef = useRef(null);
     let canvas = null;
     let p;
@@ -10,6 +12,7 @@ function HomePage() {
     useEffect(()=>{
         const sketch = new p5((sketch)=>{
             let nodes = [];
+            let diameter = 55;
             const numNodes = 10;
             let categories = [
                 "Food","Travel","Books","Drive","Passion","Educator",
@@ -20,17 +23,17 @@ function HomePage() {
                 constructor(x, y,i) {
                   this.x = x;
                   this.y = y;
-                  this.radius = 55;
+                  this.diameter = diameter;
                   this.speedX = p.random(-2, 2);
                   this.speedY = p.random(-2, 2);
-                  this.color = p.color(p.random(0,50), p.random(50,100), p.random(100,200),70);
+                  this.color = p.color(p.random(0,50), p.random(100,150), p.random(100,200));
                   this.text = categories[i];
                 }
 
                 display() {
                     p.fill(this.color);
                     p.noStroke();
-                    p.ellipse(this.x, this.y, this.radius);
+                    p.ellipse(this.x, this.y, this.diameter);
                     p.fill(0);
                     if(this.text==="?"){
                         p.textSize(25);
@@ -45,11 +48,11 @@ function HomePage() {
                     this.x += this.speedX;
                     this.y += this.speedY;
             
-                    if (this.x < 0 || this.x > p.width) {
+                    if ((this.x-this.diameter/2) < 0 || (this.x+this.diameter/2) > p.width) {
                         this.speedX *= -1;
                         }
             
-                    if (this.y < 0 || this.y > p.height) {
+                    if ((this.y-this.diameter/2) <= 0 || (this.y+this.diameter/2) > p.height) {
                         this.speedY *= -1;
                         }
                     }
@@ -57,24 +60,24 @@ function HomePage() {
 
             p = sketch;
             p.setup = () =>{
-                canvas = p.createCanvas(p.windowWidth,p.windowHeight*0.9).parent(sketchRef.current);
+                canvas = p.createCanvas(p.windowWidth,p.windowHeight*0.92).parent(sketchRef.current);
                 for (let i = 0; i < numNodes; i++) {
-                    let x = p.random(p.width);
-                    let y = p.random(p.height);
+                    let x = 0;
+                    let y = 0;
                     let newPos = true;
 
                     while(newPos){
                         newPos = false;
+                        x = p.random(diameter,p.width-diameter);
+                        y = p.random(diameter,p.height-diameter);
                         for(let i=0;i<nodes.length;i++){
                             const node = nodes[i];
                             const d = p.dist(node.x,node.y,x,y);
-                            if(d<=node.radius*3){
+                            if(d<=node.diameter){
                                 newPos = true;
                                 break;
                             }
                         }
-                        x = p.random(p.width);
-                        y = p.random(p.height);
                     }
                    
 
@@ -86,13 +89,12 @@ function HomePage() {
             p.draw = () =>{
                 p.background(230,230,230);
 
-                  // Draw edges between nodes
                 for (let i = 0; i < nodes.length; i++) {
                     const nodeA = nodes[i];
                     for (let j = i + 1; j < nodes.length; j++) {
                         const nodeB = nodes[j];
                         const d = p.dist(nodeA.x, nodeA.y, nodeB.x, nodeB.y);
-                        if(d<nodeA.radius){
+                        if(d<nodeA.diameter){
                         nodeA.speedX *= -1;
                         nodeA.speedY *= -1;
                         nodeB.speedX *= -1;
@@ -102,6 +104,7 @@ function HomePage() {
                         if (d < forceDist) {
                         p.stroke(50,50,100,80);
                         p.strokeWeight(((forceDist-d)*4)/forceDist);
+
                         p.line(nodeA.x, nodeA.y, nodeB.x, nodeB.y);
                         }
                     }
@@ -117,10 +120,24 @@ function HomePage() {
             p.windowResized = () =>{
                 p.resizeCanvas(p.windowWidth,p.height);
             }
+
+            p.mousePressed = () =>{
+                for(let i=0;i<numNodes;++i){
+                    let currNode = nodes[i];
+                    if(p.abs(p.mouseX-currNode.x)<currNode.diameter/2 && 
+                      p.abs(p.mouseY-currNode.y)<currNode.diameter/2){
+                        if(currNode.text=="Travel"){
+                            navigate("travel");
+                        }else if(currNode.text=="Books"){
+                            navigate("books");
+                        }
+                      }
+                }
+            }
         })
 
         if(canvas){
-            p.resizeCanvas(window.innerWidth,p.height);
+            p.resizeCanvas(window.innerWidth,window.innerHeight*0.92);
         }
 
         return ()=>{

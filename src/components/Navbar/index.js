@@ -8,51 +8,7 @@ import {useNavigate} from 'react-router-dom';
 
 import './style.scss';
 import MenuDropDown from '../MenuDropDown';
-
-const menuItems = [
-    {
-        name: 'HOME',
-        url: '/',
-        icon: '',
-    },
-    {
-        name: 'EXPERIENCE',
-        url: '',
-        icon: '',
-        submenu:[
-            {
-                name: 'ACADEMICS',
-                url: 'academics',
-                icon: '',
-            },
-            {
-                name: 'BOOKS',
-                url: 'books',
-                icon: '',
-            },
-            {
-                name: 'TRAVEL',
-                url: 'travel',
-                icon: '',
-            },
-        ]
-    },
-    {
-        name: 'PORTFOLIO',
-        url: 'portfolio',
-        icon: ''
-    },
-    {
-        name: 'BLOGS',
-        url: 'blogs',
-        icon: ''
-    },
-    {
-        name: 'CONTACT ME',
-        url: 'contactme',
-        icon: ''
-    }
-]
+import menuItems  from '../../contants/menus';
 
 function Navbar(){
     const navigate = useNavigate();
