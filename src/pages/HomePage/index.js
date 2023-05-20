@@ -31,7 +31,7 @@ function HomePage() {
                     p.fill(this.color);
                     p.noStroke();
                     p.ellipse(this.x, this.y, this.radius);
-                    p.fill(200,200,200);
+                    p.fill(0);
                     if(this.text==="?"){
                         p.textSize(25);
                     }else{
@@ -57,7 +57,7 @@ function HomePage() {
 
             p = sketch;
             p.setup = () =>{
-                canvas = p.createCanvas(p.windowWidth,400).parent(sketchRef.current);
+                canvas = p.createCanvas(p.windowWidth,p.windowHeight*0.9).parent(sketchRef.current);
                 for (let i = 0; i < numNodes; i++) {
                     let x = p.random(p.width);
                     let y = p.random(p.height);
@@ -84,7 +84,7 @@ function HomePage() {
             }
 
             p.draw = () =>{
-                p.background(10,10,10);
+                p.background(230,230,230);
 
                   // Draw edges between nodes
                 for (let i = 0; i < nodes.length; i++) {
@@ -115,12 +115,12 @@ function HomePage() {
             }
 
             p.windowResized = () =>{
-                p.resizeCanvas(p.windowWidth,400);
+                p.resizeCanvas(p.windowWidth,p.height);
             }
         })
 
         if(canvas){
-            p.resizeCanvas(window.innerWidth,400);
+            p.resizeCanvas(window.innerWidth,p.height);
         }
 
         return ()=>{
