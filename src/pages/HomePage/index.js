@@ -24,8 +24,8 @@ function HomePage() {
                   this.x = x;
                   this.y = y;
                   this.diameter = diameter;
-                  this.speedX = p.random(-2, 2);
-                  this.speedY = p.random(-2, 2);
+                  this.speedX = p.random(-1, 1);
+                  this.speedY = p.random(-1, 1);
                   this.color = p.color(p.random(0,50), p.random(100,150), p.random(100,200));
                   this.text = categories[i];
                 }
@@ -34,7 +34,7 @@ function HomePage() {
                     p.fill(this.color);
                     p.noStroke();
                     p.ellipse(this.x, this.y, this.diameter);
-                    p.fill(0);
+                    p.fill(255);
                     if(this.text==="?"){
                         p.textSize(25);
                     }else{
