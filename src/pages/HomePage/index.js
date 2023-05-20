@@ -18,7 +18,7 @@ function HomePage() {
     useEffect(()=>{
         const sketch = new p5((sketch)=>{
             let nodes = [];
-            let diameter = 60;
+            let diameter = 70;
             let img = [];
             let categories = [
                 {
@@ -46,14 +46,14 @@ function HomePage() {
                     name:"Github",
                     img:GithubIcon,
                     url:"https://github.com/bhattaroshan",
-                    color: [114, 46, 209],
+                    color: [255,255,255],
                     external_link: true
                 },
                 {
                     name:"Facebook",
                     img:FacebookIcon,
                     url:"https://www.facebook.com/roshan.bhatta2",
-                    color: [59, 89, 152],
+                    color: [255,255,255],
                     external_link: true
                 },
                 {
@@ -103,7 +103,8 @@ function HomePage() {
                   this.diameter = diameter;
                   this.speedX = p.random(-1, 1)<0?-0.4:0.4;
                   this.speedY = p.random(-1, 1)<0?-0.4:0.4;
-                  this.color = p.color(categories[i].color);
+                  //this.color = p.color(categories[i].color);
+                  this.color = p.color(255,255,255);
                   this.text = categories[i].name;
                   this.url = categories[i].url;
                   this.external_link = categories[i].external_link;
@@ -112,18 +113,18 @@ function HomePage() {
 
                 display() {
                     p.stroke(this.color);
-                    p.strokeWeight(1);
-                    //p.fill(this.color);
-                    p.noFill();
+                    p.strokeWeight(0.8);
+                    p.fill(10,10,10);
+                    //p.noFill();
                     //p.noStroke();
                     //p.stroke(2);
                     p.ellipse(this.x, this.y, this.diameter);
                     p.fill(255);
                     p.textSize(10);
                     p.textAlign(p.CENTER,p.CENTER);
-                    //p.text(this.text,this.x,this.y-this.diameter/5);
-                    p.image(this.img,this.x-(this.diameter/2)/1.5,this.y-(this.diameter/2)/1.5,
-                            this.diameter/1.5,this.diameter/1.5);
+                    p.text(this.text,this.x,this.y+this.diameter/4);
+                    p.image(this.img,this.x-(this.diameter/2)/2.5,this.y-(this.diameter/2)/1.5,
+                            this.diameter/2.5,this.diameter/2.5);
                   }
           
                 update() {
