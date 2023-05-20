@@ -14,9 +14,6 @@ function TagIcons({style,icons}) {
     const [currentIcons,setCurrentIcon] = useState(Array(icons.length).fill(null));
     const [clickedIcons, setClickedIcons] = useState(Array(icons.length).fill(false));
     const [hoveredIcons, setHoveredIcons] = useState(Array(icons.length).fill('none'));
-    const [swipeValue, setSwipeValue] = React.useState(0);
-    const [mousePos,setMousePos] = useState({x:0,y:0});
-    const [mouseDown,setMouseDown] = useState(false);
 
     const [dragPosition,setDragPosition] = useState({x:0,y:0});
 
@@ -74,38 +71,7 @@ function TagIcons({style,icons}) {
         setHoveredIcons(hIcons);
     }
 
-    function handleMouseDown(e){
-        const x = e.clientX;
-        const y = e.clientY;
-        setMousePos({x:x,y:y});
-        setMouseDown(true);
-    }
-
-    function handleMouseUp(e){
-        const x = e.clientX;
-        const y = e.clientY;
-        const deltaX = (mousePos.x-x); //if +ve left slide
-        const deltaY = (mousePos.y-y);
-        setMouseDown(false);
-    }
-
-    function handleMouseMove(e){
-        if(mouseDown===true){ //dragging has started
-            const element = moveRef.current;
-            const x = e.clientX;
-            const y = e.clientY;
-            const deltaX = -(mousePos.x-x); //if +ve left slide
-            const deltaY = -(mousePos.y-y);
-            if(element){
-                if(deltaX<=0){
-                    element.style.transform=`translate(${deltaX}px,0)`;
-                }
-            }
-        }
-    }
-
     function handleOnDrag(e,data){
-        console.log("dragging right now");
         const frameLeft = frameRef.current.getBoundingClientRect().left;
         const frameRight = frameRef.current.getBoundingClientRect().right;
         const iconLeft = iconRef.current.getBoundingClientRect().left;
@@ -133,7 +99,7 @@ function TagIcons({style,icons}) {
 
     return (<Box sx={{overflow:'hidden', display:'flex',maxWidth:'80%'}} ref={frameRef}>
                 <Draggable axis='x' onDrag={handleOnDrag} onStop={handleDragStop} position={dragPosition}>
-                <Box sx={style} style={{gap:'70px'}} ref={iconRef}>
+                <Box sx={{...style, gap:'75px'}}  ref={iconRef}>
                 {
                     icons.map((v,i)=>{
                         return <Box key={i} sx={{display:'flex', flexDirection:'column',
@@ -146,7 +112,9 @@ function TagIcons({style,icons}) {
                                     <Icon sx={{fontSize:'40px'}}>
                                         {currentIcons[i]}
                                     </Icon>
-                                    <Typography sx={{fontWeight:clickedIcons[i]?"bold":"light"}}>{v.title}</Typography>
+                                    <Typography sx={{fontWeight:clickedIcons[i]?"700":"300",
+                                                    minWidth:`${9*v.title.length}px`}}>{v.title}
+                                    </Typography>
                                     <span className="tag_icons_horizontal_line" style={{visibility:hoveredIcons[i]}}/>
                                 </Box>
                     })
