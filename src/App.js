@@ -8,7 +8,7 @@ import BooksPage from './pages/BooksPage';
 const theme = createTheme({
   palette:{
     primary:{
-      main: "#000000"
+      main: "#202020"
     },
     secondary:{
       main:"#ffffff"

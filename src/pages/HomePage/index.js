@@ -12,22 +12,84 @@ function HomePage() {
     useEffect(()=>{
         const sketch = new p5((sketch)=>{
             let nodes = [];
-            let diameter = 55;
-            const numNodes = 10;
+            let diameter = 70;
             let categories = [
-                "Food","Travel","Books","Drive","Passion","Educator",
-                "Coder","?","Music","Curious"
+                {
+                    name:"Food",
+                    url:"food",
+                    color: [128,128,128],
+                    external_link: false
+                },
+                {
+                    name:"Travel",
+                    url:"travel",
+                    color: [128,128,128],
+                    external_link: false
+                },
+                {
+                    name:"Books",
+                    url:"books",
+                    color: [255,128,128],
+                    external_link: false
+                },
+                {
+                    name:"Github",
+                    url:"https://github.com/bhattaroshan",
+                    color: [255,128,128],
+                    external_link: true
+                },
+                {
+                    name:"Facebook",
+                    url:"https://www.facebook.com/roshan.bhatta2",
+                    color: [255,128,128],
+                    external_link: true
+                },
+                {
+                    name:"Blogs",
+                    url:"blogs",
+                    color: [255,128,128],
+                    external_link: false
+                },
+                {
+                    name:"Portfolio",
+                    url:"portfolio",
+                    color: [255,128,128],
+                    external_link: false
+                },
+                {
+                    name:"Instagram",
+                    url:"https://www.instagram.com/roshan_bhatta_/",
+                    color: [255,128,128],
+                    external_link: true
+                },
+                {
+                    name:"Leetcode",
+                    url:"https://leetcode.com/bhatta/",
+                    color: [255,128,128],
+                    external_link: true
+                },
+                {
+                    name:"Hackerrank",
+                    url:"https://www.hackerrank.com/bhattaroshan",
+                    color: [255,128,128],
+                    external_link: true
+                },
+                
             ];
+
+            const numNodes = categories.length;
 
             class Node {
                 constructor(x, y,i) {
                   this.x = x;
                   this.y = y;
                   this.diameter = diameter;
-                  this.speedX = p.random(-1, 1);
-                  this.speedY = p.random(-1, 1);
+                  this.speedX = p.random(-1, 1)<0?-0.4:0.4;
+                  this.speedY = p.random(-1, 1)<0?-0.4:0.4;
                   this.color = p.color(p.random(0,50), p.random(100,150), p.random(100,200));
-                  this.text = categories[i];
+                  this.text = categories[i].name;
+                  this.url = categories[i].url;
+                  this.external_link = categories[i].external_link;
                 }
 
                 display() {
@@ -35,11 +97,7 @@ function HomePage() {
                     p.noStroke();
                     p.ellipse(this.x, this.y, this.diameter);
                     p.fill(255);
-                    if(this.text==="?"){
-                        p.textSize(25);
-                    }else{
-                        p.textSize(12);
-                    }
+                    p.textSize(12);
                     p.textAlign(p.CENTER,p.CENTER);
                     p.text(this.text,this.x,this.y);
                   }
@@ -79,9 +137,6 @@ function HomePage() {
                             }
                         }
                     }
-                   
-
-
                     nodes.push(new Node(x, y,i));
                   }
             }
@@ -100,10 +155,14 @@ function HomePage() {
                         nodeB.speedX *= -1;
                         nodeB.speedY *= -1;
                         }
-                        const forceDist = 300;
+                        
+                        let forceDist = 500;
+                        if(p.width<1000){
+                            forceDist = 300;
+                        }
                         if (d < forceDist) {
                         p.stroke(50,50,100,80);
-                        p.strokeWeight(((forceDist-d)*4)/forceDist);
+                        p.strokeWeight(((forceDist-d)*2.5)/forceDist);
 
                         p.line(nodeA.x, nodeA.y, nodeB.x, nodeB.y);
                         }
@@ -126,11 +185,10 @@ function HomePage() {
                     let currNode = nodes[i];
                     if(p.abs(p.mouseX-currNode.x)<currNode.diameter/2 && 
                       p.abs(p.mouseY-currNode.y)<currNode.diameter/2){
-                        if(currNode.text=="Travel"){
-                            navigate("travel");
-                        }else if(currNode.text=="Books"){
-                            navigate("books");
-                        }
+                        if(currNode.external_link)
+                            window.open(currNode.url);
+                        else
+                            navigate(currNode.url);
                       }
                 }
             }
