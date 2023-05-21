@@ -7,6 +7,7 @@ import FacebookIcon from '../../assets/images/icon_facebook.png';
 import LeetcodeIcon from '../../assets/images/icon_leetcode.png';
 import HackerrankIcon from '../../assets/images/icon_hackerrank.png';
 import BookIcon from '../../assets/images/icon_books.png';
+import LanguageIcon from '../../assets/images/icon_language.png';
 
 function HomePage() {
     const navigate = useNavigate();
@@ -21,6 +22,13 @@ function HomePage() {
             let lastPressedNode = null;
 
             let categories = [
+                {
+                    name:"Language",
+                    img:LanguageIcon,
+                    url:"language",
+                    color: [200,200,200],
+                    external_link: false
+                },
                 {
                     name:"Food",
                     img:InstagramIcon,
@@ -117,9 +125,6 @@ function HomePage() {
                     p.stroke(255,255,255);
                     p.strokeWeight(0.8);
                     p.fill(this.color);
-                    //p.noFill();
-                    //p.noStroke();
-                    //p.stroke(2);
                     p.ellipse(this.x, this.y, this.diameter);
                     p.fill(255);
                     p.textSize(10);
