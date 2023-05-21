@@ -217,7 +217,8 @@ function HomePage() {
                 p.resizeCanvas(p.windowWidth,p.height);
             }
 
-            p.mouseDragged = () =>{
+            p.mouseDragged = (event) =>{
+                event.preventDefault();
                 if(lastPressedNode!==null && mousePressed===true){
                     lastPressedNode.allowNavigation = false;
                 }
