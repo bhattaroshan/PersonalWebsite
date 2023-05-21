@@ -36,7 +36,8 @@ function Navbar(){
             <Toolbar>
                 <Grid container sx={{display:'flex'}}>
                     <Grid item sx={{display:'flex', alignItems:'center', flexGrow:"1"}}>
-                        <Avatar>R</Avatar>
+                        {/* <Avatar>R</Avatar> */}
+                        <></>
                     </Grid>
                     <Grid item sx={{display:{xs:'none',md:'flex'}}}>
                         <Tabs indicatorColor="secondary" textColor="inherit" value={navIndex}

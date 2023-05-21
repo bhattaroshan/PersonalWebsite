@@ -11,15 +11,15 @@ import BookIcon from '../../assets/images/icon_books.png';
 function HomePage() {
     const navigate = useNavigate();
     const sketchRef = useRef(null);
-    let canvas = null;
-    let p;
-
 
     useEffect(()=>{
-        const sketch = new p5((sketch)=>{
+        const sketch = new p5((p)=>{
             let nodes = [];
             let diameter = 70;
             let img = [];
+            let mousePressed = false;
+            let lastPressedNode = null;
+
             let categories = [
                 {
                     name:"Food",
@@ -101,20 +101,22 @@ function HomePage() {
                   this.x = x;
                   this.y = y;
                   this.diameter = diameter;
-                  this.speedX = p.random(-1, 1)<0?-0.4:0.4;
-                  this.speedY = p.random(-1, 1)<0?-0.4:0.4;
+                  this.speedX = p.random(-1, 1)<0?p.random(-0.4,-0.5):p.random(0.4,0.5);
+                  this.speedY = p.random(-1, 1)<0?p.random(-0.4,-0.5):p.random(0.4,0.5);
                   //this.color = p.color(categories[i].color);
-                  this.color = p.color(255,255,255);
+                  this.color = p.color(10,10,10);
                   this.text = categories[i].name;
                   this.url = categories[i].url;
                   this.external_link = categories[i].external_link;
                   this.img = img[i];
+                  this.mousePressed = false;
+                  this.allowNavigation = true;
                 }
 
                 display() {
-                    p.stroke(this.color);
+                    p.stroke(255,255,255);
                     p.strokeWeight(0.8);
-                    p.fill(10,10,10);
+                    p.fill(this.color);
                     //p.noFill();
                     //p.noStroke();
                     //p.stroke(2);
@@ -125,11 +127,17 @@ function HomePage() {
                     p.text(this.text,this.x,this.y+this.diameter/4);
                     p.image(this.img,this.x-(this.diameter/2)/2.5,this.y-(this.diameter/2)/1.5,
                             this.diameter/2.5,this.diameter/2.5);
+                    
                   }
           
                 update() {
-                    this.x += this.speedX;
-                    this.y += this.speedY;
+                    if(!this.mousePressed){
+                        this.x += this.speedX;
+                        this.y += this.speedY;
+                    }else{
+                        this.x = p.mouseX;
+                        this.y = p.mouseY;
+                    }
             
                     if ((this.x-this.diameter/2) < 0 || (this.x+this.diameter/2) > p.width) {
                         this.speedX *= -1;
@@ -141,9 +149,8 @@ function HomePage() {
                     }
                 }
 
-            p = sketch;
             p.setup = () =>{
-                canvas = p.createCanvas(p.windowWidth,p.windowHeight*0.92).parent(sketchRef.current);
+                p.createCanvas(p.windowWidth,p.windowHeight*0.92).parent(sketchRef.current);
                 for (let i = 0; i < numNodes; i++) {
                     let x = 0;
                     let y = 0;
@@ -186,10 +193,9 @@ function HomePage() {
                             forceDist = 300;
                         }
                         if (d < forceDist) {
-                        p.stroke(200,200,200,80);
-                        p.strokeWeight(((forceDist-d)*2.5)/forceDist);
-
-                        p.line(nodeA.x, nodeA.y, nodeB.x, nodeB.y);
+                            p.stroke(200,200,200,80);
+                            p.strokeWeight(((forceDist-d)*2.5)/forceDist);
+                            p.line(nodeA.x, nodeA.y, nodeB.x, nodeB.y);
                         }
                     }
                 }
@@ -211,23 +217,62 @@ function HomePage() {
                 p.resizeCanvas(p.windowWidth,p.height);
             }
 
+            p.mouseDragged = () =>{
+                if(lastPressedNode!==null && mousePressed===true){
+                    lastPressedNode.allowNavigation = false;
+                }
+            }
+
+            p.mouseMoved = () =>{
+              
+                for(let i=0;i<numNodes;++i){
+                    let currNode = nodes[i];
+                    if(p.abs(p.mouseX-currNode.x)<currNode.diameter/2 && 
+                      p.abs(p.mouseY-currNode.y)<currNode.diameter/2){
+                        currNode.color = p.color(128,128,128);
+                        p.cursor("pointer");
+                        break;
+                      }else{
+                        currNode.color = p.color(10,10,10);
+                        p.cursor("default");
+                      }
+                }
+            }
+
             p.mousePressed = () =>{
                 for(let i=0;i<numNodes;++i){
                     let currNode = nodes[i];
                     if(p.abs(p.mouseX-currNode.x)<currNode.diameter/2 && 
                       p.abs(p.mouseY-currNode.y)<currNode.diameter/2){
-                        if(currNode.external_link)
-                            window.open(currNode.url);
-                        else
-                            navigate(currNode.url);
+                        lastPressedNode = currNode;
+                        currNode.mousePressed = true;
+                        mousePressed = true;
+                    }
+                } 
+            }
+
+            p.mouseReleased = () =>{
+
+                for(let i=0;i<numNodes;++i){
+                    let currNode = nodes[i];
+                    currNode.mousePressed = false;
+                    if(p.abs(p.mouseX-currNode.x)<currNode.diameter/2 && 
+                      p.abs(p.mouseY-currNode.y)<currNode.diameter/2){
+                        if(currNode.allowNavigation===true){
+                            if(currNode.external_link)
+                                window.open(currNode.url);
+                            else
+                                navigate(currNode.url);
+                        }
                       }
+                }
+                mousePressed = false;
+                if(lastPressedNode!==null){
+                    lastPressedNode.color = p.color(10,10,10);
+                    lastPressedNode.allowNavigation = true;
                 }
             }
         })
-
-        if(canvas){
-            p.resizeCanvas(window.innerWidth,window.innerHeight*0.92);
-        }
 
         return ()=>{
             sketch.remove();
@@ -235,6 +280,7 @@ function HomePage() {
 
     },[])
     
+
     return (
         <div ref={sketchRef}>
 
