@@ -84,7 +84,10 @@ function Navbar({setExDrawerOpen}){
                     }}>
                         {
                             menuItems.map((value,index)=>{
-                                return <MenuDropDown value={value} key={index} closeDrawer={closeDrawer}/>
+                                return <MenuDropDown value={value} key={index} closeDrawer={()=>{
+                                    setExDrawerOpen(false);
+                                    closeDrawer();
+                                }}/>
                             })
                         }
             </Drawer>

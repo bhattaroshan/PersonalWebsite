@@ -14,6 +14,7 @@ function HomePage({isDrawerOpen}) {
     const sketchRef = useRef(null);
 
     useEffect(()=>{
+        console.log("inside useEffect = ",isDrawerOpen);
         const sketch = new p5((p)=>{
             let nodes = [];
             let diameter = 70;
@@ -251,7 +252,7 @@ function HomePage({isDrawerOpen}) {
               
                 for(let i=0;i<numNodes;++i){
                     let currNode = nodes[i];
-                    if(currNode!==null){
+                    if(currNode!==undefined){
                         if(p.abs(p.mouseX-currNode?.x)<currNode?.diameter/2 && 
                         p.abs(p.mouseY-currNode?.y)<currNode?.diameter/2){
                           currNode.color = p.color(128,128,128);
