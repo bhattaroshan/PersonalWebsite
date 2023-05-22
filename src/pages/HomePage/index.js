@@ -14,7 +14,6 @@ function HomePage({isDrawerOpen}) {
     const sketchRef = useRef(null);
 
     useEffect(()=>{
-        console.log("inside useEffect = ",isDrawerOpen);
         const sketch = new p5((p)=>{
             let nodes = [];
             let diameter = 70;
@@ -278,7 +277,7 @@ function HomePage({isDrawerOpen}) {
                 } 
             }
 
-            p.mouseReleased = () =>{
+            p.mouseReleased = (event) =>{
 
                 for(let i=0;i<numNodes;++i){
                     let currNode = nodes[i];
@@ -286,11 +285,13 @@ function HomePage({isDrawerOpen}) {
                     if(p.abs(p.mouseX-currNode?.x)<currNode?.diameter/2 && 
                       p.abs(p.mouseY-currNode?.y)<currNode?.diameter/2){
                         if(currNode?.allowNavigation===true && !isDrawerOpen){
-                            console.log("drawer status ",isDrawerOpen);
-                            if(currNode?.external_link)
+                            if(currNode?.external_link){
                                 window.open(currNode?.url);
-                            else
+                                event.preventDefault();
+                            }
+                            else{
                                 navigate(currNode?.url);
+                            }
                         }
                       }
                 }

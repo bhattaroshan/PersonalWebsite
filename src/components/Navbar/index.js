@@ -16,8 +16,15 @@ function Navbar({setExDrawerOpen}){
     const [anchorEl,setAnchorEl] = useState();
     const [menuOpen,setMenuOpen] = useState(false);
 
+    const mouseEventEnabledEvent = new CustomEvent('drawerEnabled', { detail: { enabled: true } });
+
     const {isOpen:isDrawerOpen,close:closeDrawer,toggle:toggleDrawer,open:openDrawer} = useDisclosure();
 
+    function setDrawerEnabled(enabled) {
+        mouseEventEnabledEvent.detail.enabled = enabled;
+        document.dispatchEvent(mouseEventEnabledEvent);
+    }
+      
     function handleMenuOpen(e,v){
         if(v.submenu!==undefined){
             setMenuOpen(true);
