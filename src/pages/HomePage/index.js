@@ -219,7 +219,7 @@ function HomePage() {
             }
 
             p.windowResized = () =>{
-                p.resizeCanvas(p.windowWidth,p.height);
+                p.resizeCanvas(p.windowWidth,p.windowHeight*0.92);
             }
 
             p.mouseDragged = (event) =>{
