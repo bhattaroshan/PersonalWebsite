@@ -8,7 +8,7 @@ function BooksPage() {
   return (
     <Box  sx={{display:'flex', flexDirection:'column', alignItems:'center'}}>
         <Typography sx={{fontSize:'40px', mb:'40px', mt:'40px', fontWeight:'700'}}>Books</Typography>
-        <Grid container spacing={4} sx={{display:'flex', justifyContent:'center', alignItems:'center', width:'90%'}}>
+        <Grid container spacing={4} sx={{display:'flex', justifyContent:'center', alignItems:'center', width:'80%'}}>
             {
                 bookList.map((v,i)=>{
                     return <Grid item key={i} sx={{display:'flex'}}>
