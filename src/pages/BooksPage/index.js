@@ -6,17 +6,17 @@ import bookList from '../../contants/books';
 
 function BooksPage() {
   return (
-    <Box sx={{display:'flex', flexDirection:'column', alignItems:'center'}}>
+    <Box  sx={{display:'flex', flexDirection:'column', alignItems:'center'}}>
         <Typography sx={{fontSize:'40px', mb:'40px', mt:'40px', fontWeight:'700'}}>Books</Typography>
-        <Grid flex container spacing={4} sx={{justifyContent:'center', alignItems:'stretch'}} md={10}>
+        <Grid container spacing={4} sx={{display:'flex', justifyContent:'center', alignItems:'center', width:'90%'}}>
             {
                 bookList.map((v,i)=>{
-                    return <Grid item key={i} sx={{display:'flex', width:'320px'}}>
+                    return <Grid item key={i} sx={{display:'flex'}}>
                         <TiledBook name={v.name} author={v.author} img={v.img} rating={v.rating}/>
                     </Grid>
                     })
                 }
-    </Grid>
+        </Grid>
     </Box>
   )
 }

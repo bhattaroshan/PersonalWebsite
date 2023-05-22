@@ -1,3 +1,4 @@
+import { useState,useEffect } from 'react';
 import Navbar from './components/Navbar';
 import {createTheme,ThemeProvider} from '@mui/material/styles';
 import TravelPage from './pages/TravelPage';
@@ -17,12 +18,14 @@ const theme = createTheme({
 });
 
 function App() {
+  const [exDrawerOpen,setExDrawerOpen] = useState(false);
+
   return (
     <BrowserRouter>
       <ThemeProvider theme={theme}>
-        <Navbar/>
+        <Navbar setExDrawerOpen={setExDrawerOpen}/>
         <Routes>
-          <Route exact path="/" element={<HomePage/>}/>
+          <Route exact path="/" element={<HomePage isDrawerOpen={exDrawerOpen}/>}/>
           <Route path="travel" element={<TravelPage/>}/>  
           <Route path="books" element={<BooksPage/>}/>  
         </Routes>

@@ -9,7 +9,7 @@ import HackerrankIcon from '../../assets/images/icon_hackerrank.png';
 import BookIcon from '../../assets/images/icon_books.png';
 import LanguageIcon from '../../assets/images/icon_language.png';
 
-function HomePage() {
+function HomePage({isDrawerOpen}) {
     const navigate = useNavigate();
     const sketchRef = useRef(null);
 
@@ -119,6 +119,8 @@ function HomePage() {
                   this.img = img[i];
                   this.mousePressed = false;
                   this.allowNavigation = true;
+                  this.lastX = 0;
+                  this.lastY = 0;
                 }
 
                 display() {
@@ -137,25 +139,29 @@ function HomePage() {
           
                 update() {
                     if(!this.mousePressed){
+                        this.lastX = this.x;
+                        this.lastY = this.y;
                         this.x += this.speedX;
                         this.y += this.speedY;
                     }else{
-                        this.x = p.mouseX;
-                        this.y = p.mouseY;
+                        if(this.allowNavigation===false){
+                            this.x = p.mouseX;
+                            this.y = p.mouseY;
+                        }
                     }
             
                     if ((this.x-this.diameter/2) < 0 || (this.x+this.diameter/2) > p.width) {
                         this.speedX *= -1;
                         }
             
-                    if ((this.y-this.diameter/2) <= 0 || (this.y+this.diameter/2) > p.height) {
+                    if ((this.y-this.diameter/2) <= 0 || (this.y+this.diameter/2) > p.height){
                         this.speedY *= -1;
                         }
                     }
                 }
 
             p.setup = () =>{
-                p.createCanvas(p.windowWidth,p.windowHeight*0.92).parent(sketchRef.current);
+                p.createCanvas(window.innerWidth,window.innerHeight*0.92).parent(sketchRef.current);
                 for (let i = 0; i < numNodes; i++) {
                     let x = 0;
                     let y = 0;
@@ -187,6 +193,18 @@ function HomePage() {
                         const nodeB = nodes[j];
                         const d = p.dist(nodeA.x, nodeA.y, nodeB.x, nodeB.y);
                         if(d<nodeA.diameter){
+                            if(p.abs(nodeA.lastX-nodeA.x)>p.abs(nodeA.lastY-nodeA.y)){ //x axis
+                                nodeA.speedX *=-1;
+                            }else{
+                                nodeA.speedY *= -1;
+                            }
+
+
+                            if(p.abs(nodeB.lastY-nodeB.y)>p.abs(nodeB.lastY-nodeB.y)){ //y axis
+                                nodeB.speedX *=-1;
+                            }else{
+                                nodeB.speedY *= -1;
+                            }
                         nodeA.speedX *= -1;
                         nodeA.speedY *= -1;
                         nodeB.speedX *= -1;
@@ -233,8 +251,8 @@ function HomePage() {
               
                 for(let i=0;i<numNodes;++i){
                     let currNode = nodes[i];
-                    if(p.abs(p.mouseX-currNode.x)<currNode.diameter/2 && 
-                      p.abs(p.mouseY-currNode.y)<currNode.diameter/2){
+                    if(p.abs(p.mouseX-currNode?.x)<currNode?.diameter/2 && 
+                      p.abs(p.mouseY-currNode?.y)<currNode?.diameter/2){
                         currNode.color = p.color(128,128,128);
                         p.cursor("pointer");
                         break;
@@ -248,8 +266,8 @@ function HomePage() {
             p.mousePressed = () =>{
                 for(let i=0;i<numNodes;++i){
                     let currNode = nodes[i];
-                    if(p.abs(p.mouseX-currNode.x)<currNode.diameter/2 && 
-                      p.abs(p.mouseY-currNode.y)<currNode.diameter/2){
+                    if(p.abs(p.mouseX-currNode?.x)<currNode?.diameter/2 && 
+                      p.abs(p.mouseY-currNode?.y)<currNode?.diameter/2){
                         lastPressedNode = currNode;
                         currNode.mousePressed = true;
                         mousePressed = true;
@@ -262,13 +280,13 @@ function HomePage() {
                 for(let i=0;i<numNodes;++i){
                     let currNode = nodes[i];
                     currNode.mousePressed = false;
-                    if(p.abs(p.mouseX-currNode.x)<currNode.diameter/2 && 
-                      p.abs(p.mouseY-currNode.y)<currNode.diameter/2){
-                        if(currNode.allowNavigation===true){
-                            if(currNode.external_link)
-                                window.open(currNode.url);
+                    if(p.abs(p.mouseX-currNode?.x)<currNode?.diameter/2 && 
+                      p.abs(p.mouseY-currNode?.y)<currNode?.diameter/2){
+                        if(currNode?.allowNavigation===true && isDrawerOpen===false){
+                            if(currNode?.external_link)
+                                window.open(currNode?.url);
                             else
-                                navigate(currNode.url);
+                                navigate(currNode?.url);
                         }
                       }
                 }

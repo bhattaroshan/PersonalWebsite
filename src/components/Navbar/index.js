@@ -10,7 +10,7 @@ import './style.scss';
 import MenuDropDown from '../MenuDropDown';
 import menuItems  from '../../contants/menus';
 
-function Navbar(){
+function Navbar({setExDrawerOpen}){
     const navigate = useNavigate();
     const [navIndex,setNavIndex] = useState(0);
     const [anchorEl,setAnchorEl] = useState();
@@ -18,7 +18,6 @@ function Navbar(){
 
     const {isOpen:isDrawerOpen,close:closeDrawer,toggle:toggleDrawer,open:openDrawer} = useDisclosure();
 
-  
     function handleMenuOpen(e,v){
         if(v.submenu!==undefined){
             setMenuOpen(true);
@@ -56,7 +55,10 @@ function Navbar(){
                     </Grid>
                     <Grid item sx={{display:{xs:'flex',md:'none'}, alignItems:'center'}}>
                         <IconButton 
-                            onClick={openDrawer}
+                            onClick={()=>{
+                                setExDrawerOpen(true);
+                                openDrawer();
+                            }}
                             sx={{color:"white"}}>
                             <MenuIcon/>
                         </IconButton>
@@ -76,7 +78,10 @@ function Navbar(){
 
             <Drawer anchor="right"
                     open={isDrawerOpen}
-                    onClose={closeDrawer}>
+                    onClose={()=>{
+                        setExDrawerOpen(false);
+                        closeDrawer();
+                    }}>
                         {
                             menuItems.map((value,index)=>{
                                 return <MenuDropDown value={value} key={index} closeDrawer={closeDrawer}/>
