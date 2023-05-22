@@ -56,8 +56,8 @@ function Navbar({setExDrawerOpen}){
                     <Grid item sx={{display:{xs:'flex',md:'none'}, alignItems:'center'}}>
                         <IconButton 
                             onClick={()=>{
-                                setExDrawerOpen(true);
                                 openDrawer();
+                                setExDrawerOpen(true);
                             }}
                             sx={{color:"white"}}>
                             <MenuIcon/>

@@ -251,15 +251,17 @@ function HomePage({isDrawerOpen}) {
               
                 for(let i=0;i<numNodes;++i){
                     let currNode = nodes[i];
-                    if(p.abs(p.mouseX-currNode?.x)<currNode?.diameter/2 && 
-                      p.abs(p.mouseY-currNode?.y)<currNode?.diameter/2){
-                        currNode.color = p.color(128,128,128);
-                        p.cursor("pointer");
-                        break;
-                      }else{
-                        currNode.color = p.color(10,10,10);
-                        p.cursor("default");
-                      }
+                    if(currNode!==null){
+                        if(p.abs(p.mouseX-currNode?.x)<currNode?.diameter/2 && 
+                        p.abs(p.mouseY-currNode?.y)<currNode?.diameter/2){
+                          currNode.color = p.color(128,128,128);
+                          p.cursor("pointer");
+                          break;
+                        }else{
+                            currNode.color = p.color(10,10,10);
+                            p.cursor("default");
+                        }
+                    }
                 }
             }
 
@@ -282,7 +284,8 @@ function HomePage({isDrawerOpen}) {
                     currNode.mousePressed = false;
                     if(p.abs(p.mouseX-currNode?.x)<currNode?.diameter/2 && 
                       p.abs(p.mouseY-currNode?.y)<currNode?.diameter/2){
-                        if(currNode?.allowNavigation===true && isDrawerOpen===false){
+                        if(currNode?.allowNavigation===true && !isDrawerOpen){
+                            console.log("drawer status ",isDrawerOpen);
                             if(currNode?.external_link)
                                 window.open(currNode?.url);
                             else
@@ -302,7 +305,7 @@ function HomePage({isDrawerOpen}) {
             sketch.remove();
         }
 
-    },[])
+    },[isDrawerOpen])
     
 
     return (
