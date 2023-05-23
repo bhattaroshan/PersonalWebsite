@@ -11,12 +11,12 @@ import bookPlaceholder from '../../assets/images/book_placeholder.jpeg';
 import bookAnim from '../../assets/images/book-loading.gif';
 import { useFetch } from '../../hooks/useFetch';
 
-export function TiledBookTemplate({name="",author="",img="",rating=""}){
+export function TiledBookTemplate({name="",author="",cover_id="",rating=3.5}){
     return <Card sx={{ display: 'flex', width: "300px", height:"220px"}}> 
                 <CardMedia
                     component="img"
                     sx={{ width: 151, maxHeight: 220, borderTopRightRadius: '5px', borderBottomRightRadius: '5px', objectFit:'contain'}}
-                    image={img}
+                    image={cover_id}
                     alt={name}
                 />
                 <Box sx={{ display: 'flex', flexDirection: 'column' }}>
@@ -41,14 +41,29 @@ export function TiledBookTemplate({name="",author="",img="",rating=""}){
             </Card>
 }
 
-export function TiledBook({name,author,img,rating}) {
+export function TiledBook({name,author,cover_id,rating}) {
 
-    const {isLoading,error,data:bookData} = useFetch(`https://covers.openlibrary.org/b/id/${img}.json`,5);
+    if(cover_id===null) {
+        return <TiledBookTemplate name={name} author={author} cover_id={bookPlaceholder} rating={rating}/>;
+    }
+
+    const {isLoading,error,data:bookData} = useFetch(`https://covers.openlibrary.org/b/id/${cover_id}.json`,5);
 
     const urlData = bookData?.data?.source_url;
-    var urlImage = isLoading?bookAnim:error||urlData===""?bookPlaceholder:urlData;
+    var urlImage = bookPlaceholder;
+
+    // var urlImage = isLoading?bookAnim:error||urlData===""?bookPlaceholder:urlData;
+    if(isLoading){
+        urlImage = bookAnim;
+    }else{
+        if(urlData==="" || urlData===null){
+            urlImage = `https://covers.openlibrary.org/b/id/${cover_id}.jpg`;
+        }else{
+            urlImage = urlData;
+        }
+    }
 
     return (
-        <TiledBookTemplate name={name} author={author} img={urlImage} rating={rating}/>
+        <TiledBookTemplate name={name} author={author} cover_id={urlImage} rating={rating}/>
     );
 }

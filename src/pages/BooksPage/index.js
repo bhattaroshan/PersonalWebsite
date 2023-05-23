@@ -25,16 +25,6 @@ const baseURL = "https://openlibrary.org/people/bhattaroshan/books/already-read.
 //   )
 // }
 
-function TemplateBooks(){
-    return(
-        <Grid item sx={{display:'flex'}}>
-            <TiledBook name={""} 
-                    author={""} 
-                    img={""} 
-                    rating={""}/>
-        </Grid>
-    );
-}
 
 function BooksPage() {
     // const [bookLists,setBookLists] = useState([]);
@@ -61,21 +51,21 @@ function BooksPage() {
                       return <Grid item key={i} sx={{display:'flex'}}>
                           <TiledBook name={v?.work?.title} 
                                      author={v?.work?.author_names[0]} 
-                                     img={v?.work?.cover_id} 
+                                     cover_id={v?.work?.cover_id} 
                                      rating={3.4}/>
                       </Grid>
                       }):
                       <>
-                        <TiledBookTemplate name="----" author="----" img={bookAnim}/>
-                        <TiledBookTemplate name="----" author="----" img={bookAnim}/>
-                        <TiledBookTemplate name="----" author="----" img={bookAnim}/>
-                        <TiledBookTemplate name="----" author="----" img={bookAnim}/>
-                        <TiledBookTemplate name="----" author="----" img={bookAnim}/>
-                        <TiledBookTemplate name="----" author="----" img={bookAnim}/>
-                        <TiledBookTemplate name="----" author="----" img={bookAnim}/>
-                        <TiledBookTemplate name="----" author="----" img={bookAnim}/>
-                        <TiledBookTemplate name="----" author="----" img={bookAnim}/>
-                        <TiledBookTemplate name="----" author="----" img={bookAnim}/>
+                        <TiledBookTemplate name="----" author="----" cover_id={bookAnim}/>
+                        <TiledBookTemplate name="----" author="----" cover_id={bookAnim}/>
+                        <TiledBookTemplate name="----" author="----" cover_id={bookAnim}/>
+                        <TiledBookTemplate name="----" author="----" cover_id={bookAnim}/>
+                        <TiledBookTemplate name="----" author="----" cover_id={bookAnim}/>
+                        <TiledBookTemplate name="----" author="----" cover_id={bookAnim}/>
+                        <TiledBookTemplate name="----" author="----" cover_id={bookAnim}/>
+                        <TiledBookTemplate name="----" author="----" cover_id={bookAnim}/>
+                        <TiledBookTemplate name="----" author="----" cover_id={bookAnim}/>
+                        <TiledBookTemplate name="----" author="----" cover_id={bookAnim}/>
                       </>
                   }
           </Grid>
