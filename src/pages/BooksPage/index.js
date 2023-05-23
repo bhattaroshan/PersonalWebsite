@@ -6,7 +6,7 @@ import axios from "axios";
 import { useFetch } from '../../hooks/useFetch';
 import bookAnim from '../../assets/images/book-loading.gif';
 
-const baseURL = "http://openlibrary.org/people/bhattaroshan/books/already-read.json";
+const baseURL = "https://openlibrary.org/people/bhattaroshan/books/already-read.json";
 
 // function BooksPage() {
 //   return (
