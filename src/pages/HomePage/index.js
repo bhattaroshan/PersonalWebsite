@@ -121,6 +121,7 @@ function HomePage({isDrawerOpen}) {
                   this.allowNavigation = true;
                   this.lastX = 0;
                   this.lastY = 0;
+                  this.massIncrease = false;
                 }
 
                 display() {
@@ -138,6 +139,16 @@ function HomePage({isDrawerOpen}) {
                   }
           
                 update() {
+                    if(this.massIncrease && this.diameter<90){
+                        this.diameter+=2;
+                    }
+
+                    if(!this.massIncrease && this.diameter>70){
+                        this.diameter-=2;
+                    }
+                    if(this.diameter<70) this.diameter=70;
+                    if(this.diameter>90) this.diameter=90;
+
                     if(!this.mousePressed){
                         this.lastX = this.x;
                         this.lastY = this.y;
@@ -192,23 +203,23 @@ function HomePage({isDrawerOpen}) {
                     for (let j = i + 1; j < nodes.length; j++) {
                         const nodeB = nodes[j];
                         const d = p.dist(nodeA.x, nodeA.y, nodeB.x, nodeB.y);
-                        if(d<nodeA.diameter){
-                            if(p.abs(nodeA.lastX-nodeA.x)>p.abs(nodeA.lastY-nodeA.y)){ //x axis
-                                nodeA.speedX *=-1;
-                            }else{
-                                nodeA.speedY *= -1;
-                            }
+                        if(d<(nodeA.diameter/2+nodeB.diameter/2)){
+                            // if(p.abs(nodeA.lastX-nodeA.x)>p.abs(nodeA.lastY-nodeA.y)){ //x axis
+                            //     nodeA.speedX *=-1;
+                            // }else{
+                            //     nodeA.speedY *= -1;
+                            // }
 
 
-                            if(p.abs(nodeB.lastY-nodeB.y)>p.abs(nodeB.lastY-nodeB.y)){ //y axis
-                                nodeB.speedX *=-1;
-                            }else{
-                                nodeB.speedY *= -1;
-                            }
-                        nodeA.speedX *= -1;
-                        nodeA.speedY *= -1;
-                        nodeB.speedX *= -1;
-                        nodeB.speedY *= -1;
+                            // if(p.abs(nodeB.lastY-nodeB.y)>p.abs(nodeB.lastY-nodeB.y)){ //y axis
+                            //     nodeB.speedX *=-1;
+                            // }else{
+                            //     nodeB.speedY *= -1;
+                            // }
+                            nodeA.speedX *= -1;
+                            nodeA.speedY *= -1;
+                            nodeB.speedX *= -1;
+                            nodeB.speedY *= -1;
                         }
                         
                         let forceDist = 500;
@@ -255,9 +266,12 @@ function HomePage({isDrawerOpen}) {
                         if(p.abs(p.mouseX-currNode?.x)<currNode?.diameter/2 && 
                         p.abs(p.mouseY-currNode?.y)<currNode?.diameter/2){
                           currNode.color = p.color(128,128,128);
+                          currNode.massIncrease = true;
+                          //currNode.diameter = 90;
                           p.cursor("pointer");
                           break;
                         }else{
+                            currNode.massIncrease = false;
                             currNode.color = p.color(10,10,10);
                             p.cursor("default");
                         }
@@ -272,6 +286,8 @@ function HomePage({isDrawerOpen}) {
                       p.abs(p.mouseY-currNode?.y)<currNode?.diameter/2){
                         lastPressedNode = currNode;
                         currNode.mousePressed = true;
+                        currNode.massIncrease = true;
+                        currNode.color = p.color(128,128,128);
                         mousePressed = true;
                     }
                 } 
@@ -282,6 +298,8 @@ function HomePage({isDrawerOpen}) {
                 for(let i=0;i<numNodes;++i){
                     let currNode = nodes[i];
                     currNode.mousePressed = false;
+                    currNode.massIncrease = false;
+                    currNode.color = p.color(10,10,10);
                     if(p.abs(p.mouseX-currNode?.x)<currNode?.diameter/2 && 
                       p.abs(p.mouseY-currNode?.y)<currNode?.diameter/2){
                         if(currNode?.allowNavigation===true && !isDrawerOpen){

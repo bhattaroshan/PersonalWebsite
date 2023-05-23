@@ -42,7 +42,7 @@ function BooksPage() {
     // },[]);
 
     return (
-      <Box  sx={{display:'flex', flexDirection:'column', alignItems:'center'}}>
+      <Box  sx={{display:'flex', flexDirection:'column', alignItems:'center', marginBottom:'100px'}}>
           <Typography sx={{fontSize:'40px', mb:'40px', mt:'40px', fontWeight:'700'}}>Books</Typography>
           <Grid container spacing={4} sx={{display:'flex', justifyContent:'center', alignItems:'center', width:'80%'}}>
               {
