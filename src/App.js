@@ -15,6 +15,9 @@ const theme = createTheme({
       main:"#ffffff"
     },
   },
+  typography: {
+    fontFamily:'Rosario,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto'
+  }
 });
 
 function App() {

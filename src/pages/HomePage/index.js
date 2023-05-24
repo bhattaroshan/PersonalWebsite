@@ -122,16 +122,22 @@ function HomePage({isDrawerOpen}) {
                   this.lastX = 0;
                   this.lastY = 0;
                   this.massIncrease = false;
+                  this.exponential = 0.0;
                 }
 
                 display() {
-                    p.stroke(255,255,255);
+                    if(this.external_link===true) {
+                        p.stroke(255,255,255);
+                    }else{
+                        p.stroke(50,200,100);
+                    }
                     p.strokeWeight(0.8);
                     p.fill(this.color);
                     p.ellipse(this.x, this.y, this.diameter);
                     p.fill(255);
                     p.textSize(10);
                     p.textAlign(p.CENTER,p.CENTER);
+                    p.textFont("Rosario");
                     p.text(this.text,this.x,this.y+this.diameter/4);
                     p.image(this.img,this.x-(this.diameter/2)/2.5,this.y-(this.diameter/2)/1.5,
                             this.diameter/2.5,this.diameter/2.5);
@@ -139,8 +145,13 @@ function HomePage({isDrawerOpen}) {
                   }
           
                 update() {
+                    if(this.massIncrease && this.exponential>-5.0){
+                        this.exponential-=0.1;
+                    }
+
                     if(this.massIncrease && this.diameter<90){
-                        this.diameter+=2;
+                        this.diameter+=(Math.exp(this.exponential)*2);
+                        // this.diameter+=2;
                     }
 
                     if(!this.massIncrease && this.diameter>70){
@@ -272,6 +283,7 @@ function HomePage({isDrawerOpen}) {
                           break;
                         }else{
                             currNode.massIncrease = false;
+                            currNode.exponential=0.0;
                             currNode.color = p.color(10,10,10);
                             p.cursor("default");
                         }
@@ -299,6 +311,7 @@ function HomePage({isDrawerOpen}) {
                     let currNode = nodes[i];
                     currNode.mousePressed = false;
                     currNode.massIncrease = false;
+                    currNode.exponential = 0.0;
                     currNode.color = p.color(10,10,10);
                     if(p.abs(p.mouseX-currNode?.x)<currNode?.diameter/2 && 
                       p.abs(p.mouseY-currNode?.y)<currNode?.diameter/2){
