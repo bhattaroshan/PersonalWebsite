@@ -2,7 +2,6 @@ import React from 'react'
 import {useState} from 'react';
 import {Button,Box} from '@mui/material';
 import L from 'leaflet';
-import natsu from '../../assets/images/natsu.png';
 import travelPlaces from '../../contants/places';
 import {useMapEvents} from "react-leaflet";
 

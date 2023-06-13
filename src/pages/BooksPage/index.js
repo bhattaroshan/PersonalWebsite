@@ -1,7 +1,6 @@
 import React,{useEffect,useState} from 'react'
 import {TiledBook,TiledBookTemplate} from '../../components/TiledBook';
 import { Grid,Box,Typography } from '@mui/material';
-import bookList from '../../contants/books';
 import axios from "axios";
 import { useFetch } from '../../hooks/useFetch';
 import bookAnim from '../../assets/images/book-loading.gif';
@@ -56,16 +55,11 @@ function BooksPage() {
                       </Grid>
                       }):
                       <>
-                        <TiledBookTemplate name="----" author="----" cover_id={bookAnim}/>
-                        <TiledBookTemplate name="----" author="----" cover_id={bookAnim}/>
-                        <TiledBookTemplate name="----" author="----" cover_id={bookAnim}/>
-                        <TiledBookTemplate name="----" author="----" cover_id={bookAnim}/>
-                        <TiledBookTemplate name="----" author="----" cover_id={bookAnim}/>
-                        <TiledBookTemplate name="----" author="----" cover_id={bookAnim}/>
-                        <TiledBookTemplate name="----" author="----" cover_id={bookAnim}/>
-                        <TiledBookTemplate name="----" author="----" cover_id={bookAnim}/>
-                        <TiledBookTemplate name="----" author="----" cover_id={bookAnim}/>
-                        <TiledBookTemplate name="----" author="----" cover_id={bookAnim}/>
+                      {
+                        Array(10).fill(0).map((v,i)=>{
+                            return <TiledBookTemplate key={i} name="----" author="----" cover_id={bookAnim}/>
+                        })
+                      }
                       </>
                   }
           </Grid>

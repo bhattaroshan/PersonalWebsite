@@ -35,15 +35,12 @@ function Navbar({setExDrawerOpen}){
         }
     }
 
-  
-
     return (
         <AppBar position="sticky" sx={{margin:0, padding:0}}>
             <Toolbar>
                 <Grid container sx={{display:'flex'}}>
                     <Grid item sx={{display:'flex', alignItems:'center', flexGrow:"1"}}>
                         {/* <Avatar>R</Avatar> */}
-                        <></>
                     </Grid>
                     <Grid item sx={{display:{xs:'none',md:'flex'}}}>
                         <Tabs indicatorColor="secondary" textColor="inherit" value={navIndex}

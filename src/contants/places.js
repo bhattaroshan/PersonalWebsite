@@ -2,27 +2,45 @@
 const travelPlaces = [
         { 
             latlong:[27.4500182,83.2397003], //Lumbini
-            place: 'Lumbini'
+            place: 'Lumbini',
+            tags:[
+                "all","holiday","work"
+            ]
         }, 
         { 
             latlong:[28.705606,80.6029461], //Dhangadi
-            place: 'Dhangadi'
+            place: 'Dhangadi',
+            tags:[
+                "all","holiday"
+            ]
         }, 
         { 
             latlong:[27.6110395,86.1827352], //Jiri
-            place: 'Jiri'
+            place: 'Jiri',
+            tags:[
+                "all","holiday"
+            ]
         }, 
         { 
             latlong:[27.433732, 85.023660], //Hetauda
-            place: 'Hetauda'
+            place: 'Hetauda',
+            tags:[
+                "all","holiday","work"
+            ]
         }, 
         { 
             latlong:[27.9067892,84.8291264], //Dhanding
-            place: 'Dhading'
+            place: 'Dhading',
+            tags:[
+                "all","work"
+            ]
         }, 
         { 
             latlong:[28.0365817,84.7144738], //Gorkha
-            place: 'Gorkha'
+            place: 'Gorkha',
+            tags:[
+                "all","holiday"
+            ]
         }, 
         { 
             latlong:[28.2320733,83.9782358], //pokhara

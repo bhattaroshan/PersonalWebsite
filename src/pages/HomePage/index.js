@@ -135,6 +135,7 @@ function HomePage({isDrawerOpen}) {
                     p.fill(this.color);
                     p.ellipse(this.x, this.y, this.diameter);
                     p.fill(255);
+                    p.noStroke();
                     p.textSize(10);
                     p.textAlign(p.CENTER,p.CENTER);
                     p.textFont("Rosario");
@@ -207,7 +208,7 @@ function HomePage({isDrawerOpen}) {
             }
 
             p.draw = () =>{
-                p.background(10,10,10);
+                p.background(17,17,17);
 
                 for (let i = 0; i < nodes.length; i++) {
                     const nodeA = nodes[i];
