@@ -6,8 +6,19 @@ import ComputerImage2 from '../../assets/images/computerImage.png';
 import {gsap} from 'gsap';
 
 import './style.scss';
+import PortfolioCard from '../../components/PortfolioCard';
 
+const products = [
+    {
+        cover:'',
+        name:'roshan',
+        price: 200,
 
+    },
+    {
+
+    }
+]
 
 function PortfolioPage() {
   const imgRef = useRef(null);
@@ -30,8 +41,8 @@ function PortfolioPage() {
 
     },[])
 
-  return (
-    <Box sx={{minHeight:'40vh', background:"#0c0c0c", boxShadow: 3}}>
+  return (<Box sx={{display:'flex', flexDirection:'column', alignItems:'center', justifyContent:'center'}}>
+    <Box sx={{width:'100%', minHeight:'40vh', background:"#0c0c0c", boxShadow: 3}}>
         <Grid container spacing={0} sx={{display:'flex', justifyContent:'center', paddingY:5}}>
             <Grid item xs={12} sm={6} md={6} sx={{display:'flex', flexDirection:'column', 
                     justifyContent:'center', alignItems:'center', paddingX:'30px'}}>
@@ -46,23 +57,15 @@ function PortfolioPage() {
             </Grid>
         </Grid>
     </Box>
-
-        /* <Box sx={{display:'flex'}}>
-            <Box flexGrow={0.5}>
-                <Typography>Test</Typography>
-                <Card sx={{ display: 'flex', width: "300px", height:"220px"}}> 
-                <CardMedia
-                    component="img"
-                    sx={{ width: 151, maxHeight: 220, borderTopRightRadius: '5px', borderBottomRightRadius: '5px', objectFit:'contain'}}
-                    image={book_hooked}
-                    alt={"book_hooked"}
-                />
-                </Card>
-            </Box>
-            <Box flexGrow={0.5}>
-                <Typography>Test</Typography>
-            </Box>
-        </Box> */
+    <Grid container sx={{display:'flex', justifyContent:'center', width:'80%'}} spacing={10} >
+      {[1,2,3,4,5].map((product,index) => (
+        <Grid key={index} item xs={12} sm={12} md={12} lg={6} sx={{display:'flex'}}>
+          <PortfolioCard product={product} />
+        </Grid>
+      ))}
+    </Grid>
+</Box>
+     
   );
 }
 
