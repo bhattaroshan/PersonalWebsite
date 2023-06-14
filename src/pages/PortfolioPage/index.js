@@ -2,6 +2,7 @@ import React, {useRef,useEffect} from 'react'
 import {Box, Typography,Card,CardMedia,Grid, Container} from '@mui/material';
 import PortfolioImage from '../../assets/images/portfolio_page.png';
 import ComputerImage from '../../assets/images/computer.png';
+import ComputerImage2 from '../../assets/images/computerImage.png';
 import {gsap} from 'gsap';
 
 import './style.scss';
@@ -31,16 +32,18 @@ function PortfolioPage() {
     },[])
 
   return (
-    <Box sx={{minHeight:'40vh', background:"#154c79", boxShadow: 3}}>
-        <Grid container spacing={0} alignItems='center' justifyContent='center'>
-            <Grid item xs={12} sm={4} marginX={5}>
-                <Typography ref={txtRef} sx={{textAlign:'center',
+    <Box sx={{minHeight:'40vh', background:"#0c0c0c", boxShadow: 3}}>
+        <Grid container spacing={0} sx={{display:'flex', justifyContent:'center', paddingY:5}}>
+            <Grid item xs={12} sm={6} md={6} sx={{display:'flex', flexDirection:'column', 
+                    justifyContent:'center', alignItems:'center', paddingX:'30px'}}>
+                <Typography ref={txtRef} sx={{textAlign:'left',
                                 fontSize:'80px', fontWeight:'900', color:'white'}}>Portfolio</Typography>
-                <Typography ref={txtRef2} sx={{textAlign:'center',
-                                fontSize:'20px', color:'#d0d0d0'}}>Transforming Ideas into Intelligent Code</Typography>
+                <Typography ref={txtRef2} sx={{textAlign:'left',
+                                fontSize:'20px', color:'#c0c0c0'}}>Transforming Ideas into Intelligent Code</Typography>
             </Grid>
-            <Grid item xs={12} sm={7} md={6}>
-                <img ref={imgRef} src={ComputerImage} style={{width:'100%'}}/>
+            <Grid item xs={12} sm={7} md={6} sx={{display:'flex', justifyContent:'center', 
+                                                  paddingX:'30px', marginY:'20px'}}>
+                <img ref={imgRef} src={ComputerImage2} />
             </Grid>
         </Grid>
     </Box>

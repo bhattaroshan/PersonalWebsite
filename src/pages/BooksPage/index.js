@@ -42,8 +42,12 @@ function BooksPage() {
 
     return (
       <Box  sx={{display:'flex', flexDirection:'column', alignItems:'center', marginBottom:'100px'}}>
+        <Box sx={{minHeight:'20vh', minWidth:'100%', display:'flex', 
+                  justifyContent:'center', alignItems:'center', background:'#0c0c0c', color:'white'}}>
           <Typography sx={{fontSize:'40px', mb:'40px', mt:'40px', fontWeight:'700'}}>Books</Typography>
-          <Grid container spacing={4} sx={{display:'flex', justifyContent:'center', alignItems:'center', width:'80%'}}>
+        </Box>
+          <Grid container spacing={4} sx={{display:'flex', justifyContent:'center', 
+                                        alignItems:'center', width:'80%', marginTop: '20px'}}>
               {
                   !isLoading?
                   bookLists?.map((v,i)=>{
@@ -51,13 +55,15 @@ function BooksPage() {
                           <TiledBook name={v?.work?.title} 
                                      author={v?.work?.author_names[0]} 
                                      cover_id={v?.work?.cover_id} 
-                                     rating={3.4}/>
+                                     rating={3.4}
+                                      loading={true} 
+                                     />
                       </Grid>
                       }):
                       <>
                       {
                         Array(10).fill(0).map((v,i)=>{
-                            return <TiledBookTemplate key={i} name="----" author="----" cover_id={bookAnim}/>
+                            return <TiledBookTemplate key={i} name="----" author="----" cover_id={bookAnim} loading={true}/>
                         })
                       }
                       </>

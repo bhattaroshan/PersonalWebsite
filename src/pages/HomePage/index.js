@@ -138,7 +138,7 @@ function HomePage({isDrawerOpen}) {
                     p.noStroke();
                     p.textSize(10);
                     p.textAlign(p.CENTER,p.CENTER);
-                    p.textFont("Rosario");
+                    p.textFont("Poppins");
                     p.text(this.text,this.x,this.y+this.diameter/4);
                     p.image(this.img,this.x-(this.diameter/2)/2.5,this.y-(this.diameter/2)/1.5,
                             this.diameter/2.5,this.diameter/2.5);
