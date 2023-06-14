@@ -5,23 +5,28 @@ import { styled } from '@mui/material/styles';
 import BookPlaceholder from '../../assets/images/book_placeholder.jpeg';
 
 
-export default function PortfolioCard({ product }) {
-  const { name, cover, price, colors, status, priceSale } = product;
+export default function PortfolioCard({content}) {
+  const { title,preface,thumbnail,link} = content;
+
+  function handleLink(){
+    window.open(link, '_blank');
+  }
 
   return (
-      <Card sx={{display:'flex', width:'100%', marginTop:'20px'}}>
+      <Card sx={{display:'flex', flexDirection:'column', width:'100%', marginTop:'20px', alignItems:'center'}}>
         <CardMedia 
         sx={{height:'200px', objectFit:'cover'}}
         component="img"
-        image= {BookPlaceholder}
+        image= {thumbnail}
         /> 
         <Box sx={{width:'100%', display:'flex', flexDirection:'column', justifyContent:'space-between'}}>
           <CardContent>
-            <Typography sx={{fontSize:'30px', fontWeight:'700'}}>Data over sound</Typography>
-            <Typography sx={{fontWeight:'200'}}>This is the test test test</Typography>
+            <Typography sx={{fontSize:'30px', fontWeight:'700'}}>{content.title}</Typography>
+            <Typography sx={{fontWeight:'200', marginTop:'10px'}}>{content.preface}</Typography>
           </CardContent>
-          <CardActions>
-            <Button>Learn More</Button>
+          <CardActions sx={{justifyContent:'center', marginBottom:'15px'}}>
+            <Button variant='outlined'>Learn More</Button>
+            <Button variant='outlined' onClick={handleLink}>Source Code</Button>
           </CardActions>
         </Box>
       </Card>

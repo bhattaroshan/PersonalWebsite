@@ -7,16 +7,28 @@ import {gsap} from 'gsap';
 
 import './style.scss';
 import PortfolioCard from '../../components/PortfolioCard';
+import Thumbnail_NepaliCalendar from '../../assets/portfolio/thumbnail_nepcalendar.png';
+import Thumbnail_Synthesizer from '../../assets/portfolio/thumbnail_synthesizer.png';
+import Thumbnail_GuitarTuner from '../../assets/portfolio/thumbnail_guitartuner.png';
 
-const products = [
+const contents = [
     {
-        cover:'',
-        name:'roshan',
-        price: 200,
-
+        title:'Qt Sythesizer',
+        preface:'This is an app designed in Qt6 c++. It implements signal processing algorithms in time domain. It might be a great tool for people who want to experiment with frequency, harmonics. It could also be a tool for sound engineers to some extent.',
+        thumbnail: Thumbnail_Synthesizer,
+        link: 'https://github.com/bhattaroshan/QtSynthesizer'
     },
     {
-
+      title:'Nepali Calendar',
+      preface:'Calendar app is created in qml and c++. All the UI component is designed in qml and its backend is done in c++. Cloud side backend is designed in fastapi in Python. Since the app is written in qml in qt6, you can technically compile the source for any platform you wish and run the app.',
+      thumbnail: Thumbnail_NepaliCalendar,
+      link: 'https://github.com/bhattaroshan/NepaliCalendar'
+    },
+    {
+      title:'Guitar Tuner',
+      preface:'Guitar Tuner is built using qt6. This app makes use of portaudio to get access of microphone and sample its data. The CMakeLists.txt is not implemented in a standard way to import portaudio. CMake file must be modified to compile this app.',
+      thumbnail: Thumbnail_GuitarTuner,
+      link: 'https://github.com/bhattaroshan/Qt6GuitarTuner'
     }
 ]
 
@@ -57,10 +69,11 @@ function PortfolioPage() {
             </Grid>
         </Grid>
     </Box>
-    <Grid container sx={{display:'flex', justifyContent:'center', width:'80%'}} spacing={10} >
-      {[1,2,3,4,5].map((product,index) => (
+    <Grid container sx={{display:'flex', justifyContent:'center', width:'90%', marginTop:'10px', 
+                        marginBottom:'60px'}} spacing={5} >
+      {contents.map((content,index) => (
         <Grid key={index} item xs={12} sm={12} md={12} lg={6} sx={{display:'flex'}}>
-          <PortfolioCard product={product} />
+          <PortfolioCard content={content} />
         </Grid>
       ))}
     </Grid>
