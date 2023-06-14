@@ -28,7 +28,6 @@ function PortfolioPage() {
             {x:0,duration: 0.7, opacity:1, ease: 'power2.out'}
         );
 
-            console.log("test");
     },[])
 
   return (
@@ -43,7 +42,7 @@ function PortfolioPage() {
             </Grid>
             <Grid item xs={12} sm={7} md={6} sx={{display:'flex', justifyContent:'center', 
                                                   paddingX:'30px', marginY:'20px'}}>
-                <img ref={imgRef} src={ComputerImage2} />
+                <img ref={imgRef} src={ComputerImage2} style={{width:'60%', objectFit:'cover'}}/>
             </Grid>
         </Grid>
     </Box>
