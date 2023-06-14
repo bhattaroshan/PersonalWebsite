@@ -56,14 +56,13 @@ function BooksPage() {
                                      author={v?.work?.author_names[0]} 
                                      cover_id={v?.work?.cover_id} 
                                      rating={3.4}
-                                      loading={true} 
                                      />
                       </Grid>
                       }):
                       <>
                       {
                         Array(10).fill(0).map((v,i)=>{
-                            return <TiledBookTemplate key={i} name="----" author="----" cover_id={bookAnim} loading={true}/>
+                            return <TiledBookTemplate key={i} name="----" author="----" cover_id={bookAnim}/>
                         })
                       }
                       </>

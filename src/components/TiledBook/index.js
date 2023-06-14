@@ -11,11 +11,12 @@ import bookPlaceholder from '../../assets/images/book_placeholder.jpeg';
 import bookAnim from '../../assets/images/book-loading.gif';
 import { useFetch } from '../../hooks/useFetch';
 
-export function TiledBookTemplate({name="",author="",cover_id="",rating=3.5,loading=true}){
+export function TiledBookTemplate({name="",author="",cover_id="",rating=3.5}){
+
     return <Card sx={{ display: 'flex', width: "300px", height:"220px"}}> 
                 <CardMedia
                     component="img"
-                    sx={{ width: 160, maxHeight: 220, borderTopRightRadius: '5px', borderBottomRightRadius: '5px', objectFit:loading===true?"none":"cover"}}
+                    sx={{ width: 160, maxHeight: 220, borderTopRightRadius: '5px', borderBottomRightRadius: '5px', objectFit:"cover"}}
                     image={cover_id}
                     alt={name}
                 />
@@ -41,10 +42,10 @@ export function TiledBookTemplate({name="",author="",cover_id="",rating=3.5,load
             </Card>
 }
 
-export function TiledBook({name,author,cover_id,rating,loading}) {
+export function TiledBook({name,author,cover_id,rating}) {
 
     if(cover_id===null) {
-        return <TiledBookTemplate name={name} author={author} cover_id={bookPlaceholder} rating={rating} loading={true}/>;
+        return <TiledBookTemplate name={name} author={author} cover_id={bookPlaceholder} rating={rating}/>;
     }
 
     const {isLoading,error,data:bookData} = useFetch(`https://covers.openlibrary.org/b/id/${cover_id}.json`,5);
@@ -66,6 +67,6 @@ export function TiledBook({name,author,cover_id,rating,loading}) {
     }
 
     return (
-        <TiledBookTemplate name={name} author={author} cover_id={urlImage} rating={rating} loading={isLoading || exLoading}/>
+        <TiledBookTemplate name={name} author={author} cover_id={urlImage} rating={rating}/>
     );
 }
