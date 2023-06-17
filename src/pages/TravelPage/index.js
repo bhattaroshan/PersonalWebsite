@@ -46,7 +46,7 @@ const travelIcons = [
 function TravelPage() {
   return (
       <Box sx={{display:'flex', flexDirection:'column', alignItems:'center', position:'relative'}}>
-        <Typography sx={{fontSize:'40px', mb:'40px', mt:'40px', fontWeight:'700'}}>Travel</Typography>
+        <Typography sx={{fontSize:'50px', mb:'40px', mt:'40px', fontWeight:'700'}}>Travel</Typography>
         <TagIcons style={{marginBottom:'20px', display:'flex', justifyContent:'start', position:'aboslute'}} icons = {travelIcons}/>
         <Map/>
       </Box>

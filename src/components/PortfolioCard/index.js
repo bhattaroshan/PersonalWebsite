@@ -21,12 +21,12 @@ export default function PortfolioCard({content}) {
         /> 
         <Box sx={{width:'100%', display:'flex', flexDirection:'column', justifyContent:'space-between'}}>
           <CardContent>
-            <Typography sx={{fontSize:'30px', fontWeight:'700'}}>{content.title}</Typography>
+            <Typography sx={{fontSize:'30px', fontWeight:'500'}}>{content.title}</Typography>
             <Typography sx={{fontWeight:'200', marginTop:'10px'}}>{content.preface}</Typography>
           </CardContent>
           <CardActions sx={{justifyContent:'center', marginBottom:'15px'}}>
-            <Button variant='outlined'>Learn More</Button>
-            <Button variant='outlined' onClick={handleLink}>Source Code</Button>
+            <Button variant='contained' color='primary'>Learn More</Button>
+            <Button variant='contained' color='primary' onClick={handleLink}>Source Code</Button>
           </CardActions>
         </Box>
       </Card>

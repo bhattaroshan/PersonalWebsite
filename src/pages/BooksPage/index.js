@@ -43,8 +43,8 @@ function BooksPage() {
     return (
       <Box  sx={{display:'flex', flexDirection:'column', alignItems:'center', marginBottom:'100px'}}>
         <Box sx={{minHeight:'20vh', minWidth:'100%', display:'flex', 
-                  justifyContent:'center', alignItems:'center', background:'#0c0c0c', color:'white'}}>
-          <Typography sx={{fontSize:'40px', mb:'40px', mt:'40px', fontWeight:'700'}}>Books</Typography>
+                  justifyContent:'center', alignItems:'center'}}>
+          <Typography sx={{fontSize:'50px', mb:'40px', mt:'40px', fontWeight:'700'}}>Books</Typography>
         </Box>
           <Grid container spacing={4} sx={{display:'flex', justifyContent:'center', 
                                         alignItems:'center', width:'80%', marginTop: '20px'}}>
