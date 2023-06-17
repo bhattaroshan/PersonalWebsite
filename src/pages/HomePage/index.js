@@ -21,6 +21,9 @@ function HomePage({isDrawerOpen}) {
             let mousePressed = false;
             let lastPressedNode = null;
 
+            let star 
+            let system
+
             let categories = [
                 {
                     name:"Language",
@@ -125,6 +128,8 @@ function HomePage({isDrawerOpen}) {
                   this.exponential = 0.0;
                 }
 
+                
+
                 display() {
                     if(this.external_link===true) {
                         p.stroke(255,255,255);
@@ -183,6 +188,76 @@ function HomePage({isDrawerOpen}) {
                     }
                 }
 
+                function grid(){
+                    p.stroke(255)
+                    p.line(p.width/2,0,p.width/2,p.height)
+                    p.line(0,p.height/2,p.width,p.height/2);
+                  }
+                  
+                  function Star(x,y){
+                    this.pos = p.createVector(p.random(x-p.width,x+p.width),p.random(y-p.height,y+p.height))
+                    this.xSpeed = p.map(this.pos.x,-p.width,p.width,-0.01,0.01)
+                    this.ySpeed = p.map(this.pos.y,-p.height,p.height,-0.01,0.01);
+                    this.speed = p.createVector(this.xSpeed,this.ySpeed);
+                    this.xAcc = this.xSpeed
+                    this.yAcc = this.ySpeed
+                    this.acc = p.createVector(this.xAcc,this.yAcc);
+                    this.size = p.random(0.5,3);
+                    this.alpha = 5
+                    this.r = p.random(128,255);
+                    this.g = p.random(128,255);
+                    this.b = p.random(128,255);
+                  }
+                  
+                  Star.prototype.display = function(){
+                    p.fill(this.r,this.g,this.b, this.alpha);
+                    p.noStroke();
+                    //line(0,0,this.pos.x,this.pos.y)
+                    p.ellipse(this.pos.x,this.pos.y,this.size,this.size);
+                    this.alpha +=5
+                  }
+                  
+                  Star.prototype.move = function(){
+                    this.pos.add(this.speed);
+                    this.speed.add(this.acc)
+                  
+                  }
+                  
+                  Star.prototype.isDead = function(){
+                    if(this.pos.x > p.width + this.size || this.pos.y > p.height + this.size || this.pos.x < -p.width - this.size|| this.pos.y < -p.height -this.size ){
+                      return true
+                    }
+                  }
+                  
+                  let StarSystem = function(x,y){
+                    this.origin = p.createVector(x,y)
+                    this.stars = []
+                  }
+                  
+                  StarSystem.prototype.initialize = function(starNum){
+                    //make star array
+                    
+                    for(let i = 0; i < starNum; i++){
+                      this.stars.push(new Star(this.origin.x,this.origin.y))
+                    }
+                    
+                  }
+                  
+                  StarSystem.prototype.addStar = function (){
+                    this.stars.push(new Star(this.origin.x,this.origin.y))
+                  }
+                  
+                  StarSystem.prototype.run = function(){
+                    for(let i = 0; i < this.stars.length; i++){
+                      this.stars[i].display();
+                      this.stars[i].move();
+                      if(this.stars[i].isDead()){
+                        this.stars.splice(i,1);
+                        this.addStar();
+                      }
+                    }
+                  }
+
             p.setup = () =>{
                 p.createCanvas(window.innerWidth,window.innerHeight*0.92).parent(sketchRef.current);
                 for (let i = 0; i < numNodes; i++) {
@@ -205,10 +280,16 @@ function HomePage({isDrawerOpen}) {
                     }
                     nodes.push(new Node(x, y,i));
                   }
+
+                  star = new Star(p.random(-p.width/2,p.width/2),p.random(-p.height/2,p.height/2));
+                  system = new StarSystem(0,0)
+                  system.initialize(200);
             }
 
             p.draw = () =>{
                 p.background(17,17,17);
+                    //p.translate(p.width/2,p.height/2)
+                system.run(); 
 
                 for (let i = 0; i < nodes.length; i++) {
                     const nodeA = nodes[i];
