@@ -53,11 +53,6 @@ function PortfolioPage() {
             {x:400,opacity:0},
             {x:0,duration:1.2,opacity:1,ease:'power2.out'}
             );
-        gsap.fromTo(imgRef.current,
-            {x: 400, opacity:0},
-            {x:0,duration: 0.7, opacity:1, ease: 'power2.out'}
-        );
-
     },[])
 
   return (<Box sx={{display:'flex', flexDirection:'column', alignItems:'center', justifyContent:'center', marginTop:'40px'}}>

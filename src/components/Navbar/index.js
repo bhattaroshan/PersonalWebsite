@@ -5,12 +5,15 @@ import MenuIcon from '@mui/icons-material/Menu';
 import useDisclosure from '../../hooks/useDisclosure';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import {useNavigate} from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import {set,reset} from '../../features/drawer/drawerSlicer';
 
 import './style.scss';
 import MenuDropDown from '../MenuDropDown';
 import menuItems  from '../../contants/menus';
 
-function Navbar({setExDrawerOpen}){
+function Navbar(){
+    const dispatch = useDispatch();
     const navigate = useNavigate();
     const [navIndex,setNavIndex] = useState(0);
     const [anchorEl,setAnchorEl] = useState();
@@ -61,7 +64,8 @@ function Navbar({setExDrawerOpen}){
                         <IconButton 
                             onClick={()=>{
                                 openDrawer();
-                                setExDrawerOpen(true);
+                                //setExDrawerOpen(true);
+                                dispatch(set());
                             }}
                             sx={{color:"white"}}>
                             <MenuIcon/>
@@ -83,13 +87,15 @@ function Navbar({setExDrawerOpen}){
             <Drawer anchor="right"
                     open={isDrawerOpen}
                     onClose={()=>{
-                        setExDrawerOpen(false);
+                        //setExDrawerOpen(false);
+                        dispatch(reset());
                         closeDrawer();
                     }}>
                         {
                             menuItems.map((value,index)=>{
                                 return <MenuDropDown value={value} key={index} closeDrawer={()=>{
-                                    setExDrawerOpen(false);
+                                    //setExDrawerOpen(false);
+                                    dispatch(reset());
                                     closeDrawer();
                                 }}/>
                             })

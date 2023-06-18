@@ -8,8 +8,10 @@ import LeetcodeIcon from '../../assets/images/icon_leetcode.png';
 import HackerrankIcon from '../../assets/images/icon_hackerrank.png';
 import BookIcon from '../../assets/images/icon_books.png';
 import LanguageIcon from '../../assets/images/icon_language.png';
+import { useSelector } from 'react-redux';
 
-function HomePage({isDrawerOpen}) {
+function HomePage() {
+    const {drawerOpen} = useSelector((state)=>state.drawer);
     const navigate = useNavigate();
     const sketchRef = useRef(null);
 
@@ -127,8 +129,6 @@ function HomePage({isDrawerOpen}) {
                   this.massIncrease = false;
                   this.exponential = 0.0;
                 }
-
-                
 
                 display() {
                     if(this.external_link===true) {
@@ -397,7 +397,7 @@ function HomePage({isDrawerOpen}) {
                     currNode.color = p.color(10,10,10);
                     if(p.abs(p.mouseX-currNode?.x)<currNode?.diameter/2 && 
                       p.abs(p.mouseY-currNode?.y)<currNode?.diameter/2){
-                        if(currNode?.allowNavigation===true && !isDrawerOpen){
+                        if(currNode?.allowNavigation===true && !drawerOpen){
                             if(currNode?.external_link){
                                 window.open(currNode?.url);
                                 event.preventDefault();
@@ -420,7 +420,7 @@ function HomePage({isDrawerOpen}) {
             sketch.remove();
         }
 
-    },[isDrawerOpen])
+    },[drawerOpen])
     
 
     return (

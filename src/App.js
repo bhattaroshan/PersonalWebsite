@@ -6,6 +6,7 @@ import {BrowserRouter, Route, Routes} from 'react-router-dom';
 import HomePage from '../src/pages/HomePage';
 import BooksPage from './pages/BooksPage';
 import PortfolioPage from './pages/PortfolioPage';
+import AcademicsPage from './pages/AcademicsPage';
 
 const theme = createTheme({
   palette:{
@@ -22,17 +23,16 @@ const theme = createTheme({
 });
 
 function App() {
-  const [exDrawerOpen,setExDrawerOpen] = useState(false);
-
   return (
     <BrowserRouter>
       <ThemeProvider theme={theme}>
-        <Navbar setExDrawerOpen={setExDrawerOpen}/>
+        <Navbar/>
         <Routes>
-          <Route exact path="/" element={<HomePage isDrawerOpen={exDrawerOpen}/>}/>
+          <Route exact path="/" element={<HomePage/>}/>
           <Route path="travel" element={<TravelPage/>}/>  
           <Route path="books" element={<BooksPage/>}/>  
           <Route path="portfolio" element={<PortfolioPage/>}/>  
+          <Route path="academics" element={<AcademicsPage/>}/>
         </Routes>
       </ThemeProvider>
     </BrowserRouter>
