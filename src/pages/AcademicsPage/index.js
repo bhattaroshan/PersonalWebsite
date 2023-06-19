@@ -22,7 +22,7 @@ gsap.registerPlugin(ScrollTrigger);
 const academics = [
     {
         name: "Paragon Public School",
-        location: "Battisputali, Kathmanud",
+        location: "Battisputali, Kathmandu",
         year: 1998,
     },
     {
@@ -56,31 +56,34 @@ export default function AcademicsPage() {
             ease: 'power2'
         })
 
-        gsap.fromTo(".box",{
-            x: window.innerWidth,
-            scale: 0,
-            opacity: 0,
-            ease: 'power3'
-        },{
-            x:0,
-            scale: 1,
-            opacity:1,
-            delay: 0.4,
-            duration: 0.5
-        })
-
-        gsap.fromTo(".date",{
-            x: -window.innerWidth,
-            scale: 0,
-            opacity: 0,
-            ease: 'power3'
-        },{
-            x:0,
-            scale: 1,
-            opacity:1,
-            delay: 0.4,
-            duration: 0.5
-        })
+        academics.map((v,i)=>{
+            gsap.fromTo(".box"+i,{
+                x: window.innerWidth,
+                scale: 0,
+                opacity: 0,
+                ease: 'power3'
+            },{
+                x:0,
+                scale: 1,
+                opacity:1,
+                delay: 0.4+i*0.05,
+                duration: 0.5
+            })
+    
+            gsap.fromTo(".date"+i,{
+                x: -window.innerWidth,
+                scale: 0,
+                opacity: 0,
+                ease: 'power3'
+            },{
+                x:0,
+                scale: 1,
+                opacity:1,
+                delay: 0.4+i*0.05,
+                duration: 0.5
+            })
+        });
+       
     },[])
 
     return (
@@ -93,9 +96,9 @@ export default function AcademicsPage() {
                 {
                     academics.map((v,i)=>{
                         return  <div style={{display:'flex',gap:'40px'}} key={i}>
-                        <Typography className="date" style={{alignSelf:'center', textAlign:'right', fontSize:'20px', width:'10vw'}}>{v.year}</Typography>
+                        <Typography className={"date"+i} style={{alignSelf:'center', textAlign:'right', fontSize:'20px', width:'10vw'}}>{v.year}</Typography>
                         <div className="line" style={{width:'0.1px', height:'20vh', border:'2px solid #c0c0c0'}}/>
-                        <div className="box" style={{width:'60vw', heigth:'10vh', 
+                        <div className={"box"+i} style={{width:'60vw', heigth:'10vh', 
                                                     border:'1px solid #0c0c0c', borderRadius: '10px',
                                                     background:'#505050'}}>
                             <Typography style={{margin:'10px', color:'white',fontSize:'20px', fontWeight:700}}>{v.name}</Typography>
