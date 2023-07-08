@@ -16,6 +16,11 @@ const menuItems = [
                 icon: '',
             },
             {
+                name: 'PROGRAMMING',
+                url: 'programming',
+                icon: '',
+            },
+            {
                 name: 'BOOKS',
                 url: 'books',
                 icon: '',

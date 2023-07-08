@@ -7,6 +7,7 @@ import HomePage from '../src/pages/HomePage';
 import BooksPage from './pages/BooksPage';
 import PortfolioPage from './pages/PortfolioPage';
 import AcademicsPage from './pages/AcademicsPage';
+import ProgrammingPage from './pages/ProgrammingPage';
 
 const theme = createTheme({
   palette:{
@@ -33,6 +34,7 @@ function App() {
           <Route path="books" element={<BooksPage/>}/>  
           <Route path="portfolio" element={<PortfolioPage/>}/>  
           <Route path="academics" element={<AcademicsPage/>}/>
+          <Route path="programming" element={<ProgrammingPage/>}/>
         </Routes>
       </ThemeProvider>
     </BrowserRouter>
