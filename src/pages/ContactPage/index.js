@@ -16,6 +16,7 @@ function ContactPage() {
                     /> 
                 </Card>
             </Grid>
+
             <Grid item xs={8} md={6} my={4} display='flex' flexDirection='column'>
                 <Typography sx={{
                                 fontSize:{
