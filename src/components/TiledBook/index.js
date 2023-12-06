@@ -23,7 +23,7 @@ export function TiledBookTemplate({name="",author="",cover_id="",rating=3.5}){
                 <Box sx={{ display: 'flex', flexDirection: 'column' }}>
                     <CardContent sx={{ flex: '1 0 auto' }}>
                     <Typography component="div" variant="h6">
-                        {name.slice(0,Math.min(name.length,27))}
+                        {name?.slice(0,Math.min(name.length,27))}
                     </Typography>
                     <Typography variant="subtitle3" color="text.secondary" component="div">
                         {author}
