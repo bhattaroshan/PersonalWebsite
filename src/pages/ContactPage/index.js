@@ -23,10 +23,6 @@ function ContactPage() {
         }
 
         try{
-            console.log(process.env.REACT_APP_EMAIL_SERVICE_ID,
-                process.env.REACT_APP_EMAIL_TEMPLATE_ID,
-                emailVars,
-                process.env.REACT_APP_EMAIL_PUBLIC_KEY);
             const result = await emailjs.send(process.env.REACT_APP_EMAIL_SERVICE_ID,
                                             process.env.REACT_APP_EMAIL_TEMPLATE_ID,
                                             emailVars,
