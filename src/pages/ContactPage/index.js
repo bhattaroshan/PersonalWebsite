@@ -3,6 +3,7 @@ import React,{useRef, useState} from 'react';
 import AboutImage from '../../assets/images/about-photo.jpeg';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import YouTubeIcon from '@mui/icons-material/YouTube';
+import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import emailjs from '@emailjs/browser';
 
 function ContactPage() {
@@ -63,8 +64,15 @@ function ContactPage() {
                         image= {AboutImage}
                     /> 
                 <Box display='flex' justifyContent='center' gap={2} my={5}>
-                    <FacebookIcon fontSize='large'/>
-                    <YouTubeIcon fontSize='large'/>
+                    <a href="https://linkedin.com/in/roshan-bhatta-092bb672/" target="_blank">
+                        <LinkedInIcon fontSize='large'/>
+                    </a>
+                    <a href="https://facebook.com/roshan.bhatta2" target="_blank">
+                        <FacebookIcon fontSize='large'/>
+                    </a>
+                    <a href="https://youtube.com/channel/UCpGgyQpHhYDJaCWC-X_1ahg" target="_black">
+                        <YouTubeIcon fontSize='large'/>
+                    </a>
                 </Box>
                 </Card>
             </Grid>
