@@ -1,5 +1,5 @@
 import { Grid,Card,CardMedia,Box, Typography,TextField, Button,Snackbar,Alert,CircularProgress } from '@mui/material';
-import React,{useState} from 'react';
+import React,{useRef, useState} from 'react';
 import AboutImage from '../../assets/images/about-photo.jpeg';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import YouTubeIcon from '@mui/icons-material/YouTube';
@@ -7,19 +7,19 @@ import emailjs from '@emailjs/browser';
 
 function ContactPage() {
 
-    const [personName,setPersonName] = useState('');
-    const [personEmail,setPersonEmail] = useState('');
-    const [personMessage,setPersonMessage] = useState('');
+    const nameRef = useRef(null);
+    const emailRef = useRef(null);
+    const messageRef = useRef(null);
 
     const [snackOpen,setSnackOpen] = useState(false);
     const [messageSentStatus,setMessageSentStatus] = useState(false);
     const [processingMessage,setProcessingMessage] = useState(false);
 
-    async function sendEmail(person,email,message){
+    async function sendEmail(){
         const emailVars = {
-            from_name:person,
-            from_email:email,
-            message:message
+            from_name:nameRef.current.value,
+            from_email:emailRef.current.value,
+            message:messageRef.current.value
         }
 
         try{
@@ -30,6 +30,9 @@ function ContactPage() {
             
             setSnackOpen(true);
             setMessageSentStatus(true);
+            nameRef.current.value="";
+            emailRef.current.value="";
+            messageRef.current.value="";
 
         }catch(error){
             setMessageSentStatus(false);
@@ -37,10 +40,9 @@ function ContactPage() {
         setProcessingMessage(false);
     }
 
-    function handleMessageSend(person,email,message){
-        sendEmail(person,email,message);
+    function handleMessageSend(){
+        sendEmail();
         setProcessingMessage(true);
-        // setMessageSentStatus(true);
     }
 
     const handleSnackClose = (event, reason) => {
@@ -89,11 +91,13 @@ function ContactPage() {
                     Passionate engineering manager with a strong backround in cloud computing, embedded programming and STEAM education. Keen enthusiast of DSP, applied mathematics, sound engineering and DSA.
                 </Typography>
                 <Typography sx={{py:'10px', fontSize:'32px', fontWeight:700, justifyContent:'center', alignItems:'center'}}>Contact Me</Typography>
+
+                {/* CONTACT FORM STARTS HERE */}
                 <TextField id="outlined-basic" label="Name" variant="outlined" sx={{py:'10px'}}
-                    onChange={(e)=>setPersonName(e.target.value)}
+                     inputRef={nameRef}
                 />
                 <TextField id="outlined-basic" label="Email" variant="outlined" sx={{py:'10px'}}
-                    onChange={(e)=>setPersonEmail(e.target.value)} 
+                     inputRef={emailRef}
                 />
                 <TextField
                             sx={{py:'10px'}}
@@ -101,10 +105,10 @@ function ContactPage() {
                             id="standard-multiline-flexible"
                             label="Message"
                             multiline
-                            onChange={(e)=>setPersonMessage(e.target.value)}
+                            inputRef={messageRef}
                 />
                 <Button variant='contained' sx={{height:'50px'}}
-                onClick={()=>handleMessageSend(personName,personEmail,personMessage)}>
+                onClick={handleMessageSend}>
                     <div style={{display:'flex',flexDirection:'row', gap:'10px'}}>
                         {
                             processingMessage && <CircularProgress color='secondary' size={24} style={{border:'none'}}/>
