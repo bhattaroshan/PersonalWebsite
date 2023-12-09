@@ -6,10 +6,14 @@ import BookPlaceholder from '../../assets/images/book_placeholder.jpeg';
 
 
 export default function PortfolioCard({content}) {
-  const { title,preface,thumbnail,link} = content;
+  const { title,preface,thumbnail,link,demo} = content;
 
   function handleLink(){
     window.open(link, '_blank');
+  }
+
+  function handleDemo(){
+    window.open(demo, '_blank');
   }
 
   return (
@@ -27,6 +31,9 @@ export default function PortfolioCard({content}) {
           <CardActions sx={{justifyContent:'center', marginBottom:'15px'}}>
             <Button variant='contained' color='primary'>Learn More</Button>
             <Button variant='contained' color='primary' onClick={handleLink}>Source Code</Button>
+            {
+              demo!==undefined &&  <Button variant='contained' color='primary' onClick={handleDemo}>Demo</Button> 
+            }
           </CardActions>
         </Box>
       </Card>

@@ -42,7 +42,8 @@ const contents = [
       title:'School Website 1',
       preface:'It\'s a webapp written in reactjs. The design is done with MUI.',
       thumbnail: Thumbnail_Adinath,
-      link: 'https://github.com/bhattaroshan/SchoolWebsite'
+      link: 'https://github.com/bhattaroshan/SchoolWebsite',
+      demo: 'https://adinathschool.edu.np'
     }
 ]
 
