@@ -19,7 +19,7 @@ export default function PortfolioCard({content}) {
         component="img"
         image= {thumbnail}
         /> 
-        <Box sx={{width:'100%', display:'flex', flexDirection:'column', justifyContent:'space-between'}}>
+        <Box sx={{display:'flex', flexDirection:'column'}}>
           <CardContent>
             <Typography sx={{fontSize:'30px', fontWeight:'500'}}>{content.title}</Typography>
             <Typography sx={{fontWeight:'200', marginTop:'10px'}}>{content.preface}</Typography>

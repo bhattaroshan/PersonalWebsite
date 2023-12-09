@@ -11,6 +11,7 @@ import Thumbnail_NepaliCalendar from '../../assets/portfolio/thumbnail_nepcalend
 import Thumbnail_Synthesizer from '../../assets/portfolio/thumbnail_synthesizer.png';
 import Thumbnail_GuitarTuner from '../../assets/portfolio/thumbnail_guitartuner.png';
 import Thumbnail_RBAudioConverter from '../../assets/portfolio/thumbnail_rbaudioconverter.jpeg';
+import Thumbnail_Adinath from '../../assets/portfolio/thumbnail_adinath.png';
 
 const contents = [
     {
@@ -36,6 +37,12 @@ const contents = [
       preface:'It\'s a software written for windows in C++ without any UI framework. It uses lame.exe and bass.dll to encode and decode different file formats. It was written in those days when functional softwares were priotized over its looks and user experience.',
       thumbnail: Thumbnail_RBAudioConverter,
       link: 'https://github.com/bhattaroshan/Audio-Converter'
+    },
+    {
+      title:'School Website 1',
+      preface:'It\'s a webapp written in reactjs. The design is done with MUI.',
+      thumbnail: Thumbnail_Adinath,
+      link: 'https://github.com/bhattaroshan/SchoolWebsite'
     }
 ]
 
