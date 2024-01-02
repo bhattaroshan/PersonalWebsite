@@ -155,6 +155,10 @@ const travelPlaces = [
             place: 'Kerala, India'
         },
         {
+            latlong: [29.388207, 79.454412],
+            place: 'Nainital, India'
+        },
+        {
             latlong:[27.044351, 88.270511], //darjeeling, india
             place: 'Darjeeling, India'
         },

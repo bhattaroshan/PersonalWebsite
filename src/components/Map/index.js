@@ -69,6 +69,7 @@ function Map() {
             return <Circle key={i} center={v.latlong} pathOptions={{ fillColor: 'red',color: 'red' }} radius={8000}>
                     <Popup>
                         {v.place}
+                        <button className='border rounded p-2 m-2 hover:bg-blue-200 active:bg-blue-300'>OK</button>
                     </Popup>
                     </Circle>
 
