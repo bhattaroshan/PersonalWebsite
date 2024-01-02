@@ -4,7 +4,7 @@ import {Button,Box} from '@mui/material';
 import L from 'leaflet';
 import travelPlaces from '../../contants/places';
 import {Polyline, useMapEvents} from "react-leaflet";
-import { geoNepal,polygon } from '../../config';
+import { geoPoly } from '../../config';
 
 import {
     MapContainer,
@@ -20,12 +20,12 @@ import { Flag } from '@mui/icons-material';
 
 function Map() {
  
-  const [globalLevel,setGlobalLevel] = useState(3);
+  const [zoomLevel,setZoomLevel] = useState(3);
 
     const handleZoomEnd = (event) => {
-        const zoomLevel = event.target.getZoom();
-        console.log('Zoom level:', zoomLevel);
-        setGlobalLevel(zoomLevel);
+        // const zoomLevel = event.target.getZoom();
+        // console.log('Zoom level:', zoomLevel);
+        setZoomLevel(event.target.getZoom());
         // Perform actions based on the zoom level change
         // ...
         //until zoom level 5 from 0 map out only counties
@@ -42,7 +42,7 @@ function Map() {
       const fillBlueOptions = { fillColor: 'blue' }
 
     return (
-        <MapContainer center={travelPlaces[0].latlong} zoom={3} scrollWheelZoom={true}> 
+        <MapContainer center={travelPlaces[0].latlong} zoom={3} scrollWheelZoom={true} > 
         <TileLayer 
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
@@ -61,8 +61,8 @@ function Map() {
        */}
         {/* <Polygon pathOptions={fillBlueOptions} positions={geoNepal} /> */}
         {
-          globalLevel<=5?
-            <Polygon pathOptions={{fillColor:'red',color:'red'}} positions={geoNepal}  />
+          zoomLevel<=4?
+            <Polygon pathOptions={{fillColor:'red',color:'red'}} positions={geoPoly}  />
           :
           travelPlaces.map((v,i)=>{
                 

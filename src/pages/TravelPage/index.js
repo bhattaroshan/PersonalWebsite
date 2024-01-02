@@ -46,9 +46,16 @@ const travelIcons = [
 function TravelPage() {
   return (
       <Box sx={{display:'flex', flexDirection:'column', alignItems:'center', position:'relative'}}>
-        <Typography sx={{fontSize:'50px', mb:'40px', mt:'40px', fontWeight:'700'}}>Travel</Typography>
-        <TagIcons style={{marginBottom:'20px', display:'flex', justifyContent:'start', position:'aboslute'}} icons = {travelIcons}/>
-        <Map/>
+        <p className='text-5xl mt-6 mb-8 md:my-12 font-extrabold'>Travel</p>
+        <div className='mb-4'>
+          <TagIcons style={{ display:'flex', justifyContent:'start', position:'aboslute'}} icons = {travelIcons}/>
+        </div>
+          <div className='flex flex-col items-center'>
+            <div className='flex justify-end w-screen mr-6'>
+              <p className='text-red-300 text-xs'>Zoom In for detail view</p>
+            </div>
+            <Map/>
+          </div>
       </Box>
   )
 }
