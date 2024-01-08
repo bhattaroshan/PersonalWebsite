@@ -45,7 +45,6 @@ export default function LanguagePage(){
                         options={options}
                         series={v}
                         type="bar"
-                        width='500px'
                         />
                         </div>
                     );
