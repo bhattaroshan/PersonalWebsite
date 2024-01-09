@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import {AppBar,Toolbar,Grid,Tab,Tabs,Menu,MenuItem,Avatar,Drawer,List,
         ListItem,Box,IconButton,ListItemButton,Collapse,Typography} from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
@@ -7,34 +7,35 @@ import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import {useNavigate} from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import {set,reset} from '../../features/drawer/drawerSlicer';
-import { useLocation } from 'react-router-dom';
 
 import './style.scss';
 import MenuDropDown from '../MenuDropDown';
 import menuItems  from '../../contants/menus';
 
 function Navbar(){
-    const location = useLocation();
-
-    let currentIndex = 0;
-    if(location.pathname==="/travel" ||
-        location.pathname==="/books" || 
-        location.pathname==="/programming" || 
-        location.pathname==="/academics") currentIndex=1;
-    else if(location.pathname==='/portfolio') currentIndex=2;
-    else if(location.pathname==='/blogs') currentIndex=3;
-    else if(location.pathname==='/contactme') currentIndex=4;
-
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const [navIndex,setNavIndex] = useState(currentIndex);
+    const [navIndex,setNavIndex] = useState(0);
     const [anchorEl,setAnchorEl] = useState();
     const [menuOpen,setMenuOpen] = useState(false);
 
     const mouseEventEnabledEvent = new CustomEvent('drawerEnabled', { detail: { enabled: true } });
 
     const {isOpen:isDrawerOpen,close:closeDrawer,toggle:toggleDrawer,open:openDrawer} = useDisclosure();
+
+    useEffect(()=>{
+        let currentIndex = 0;
+        if(window.location.pathname==="/travel" ||
+            window.location.pathname==="/books" || 
+            window.location.pathname==="/programming" || 
+            window.location.pathname==="/academics") currentIndex=1;
+        else if(window.location.pathname==='/portfolio') currentIndex=2;
+        else if(window.location.pathname==='/blogs') currentIndex=3;
+        else if(window.location.pathname==='/contactme') currentIndex=4;
+        else currentIndex=0;
+        setNavIndex(currentIndex);
+    },[window.location.pathname])
 
     function setDrawerEnabled(enabled) {
         mouseEventEnabledEvent.detail.enabled = enabled;
