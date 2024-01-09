@@ -1,9 +1,12 @@
 
 import Chart from 'react-apexcharts';
 import { useTheme } from '@mui/material/styles';
+import { useMediaQuery } from '@mui/material';
 
 export default function LanguagePage(){
-    
+    const theme = useTheme();
+    const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+
     const options= {
         chart: {
           id: "basic-bar",
@@ -12,8 +15,9 @@ export default function LanguagePage(){
         xaxis: {
           categories: ['Reading','Writing','Speaking','Listening']
         },
-      
+       
       }
+
 
     const series = [[{
         name: "Nepali (Native)",
@@ -45,6 +49,7 @@ export default function LanguagePage(){
                         options={options}
                         series={v}
                         type="bar"
+                        width={isMobile?300:500}
                         />
                         </div>
                     );
