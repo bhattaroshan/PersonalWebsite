@@ -7,15 +7,28 @@ import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import {useNavigate} from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import {set,reset} from '../../features/drawer/drawerSlicer';
+import { useLocation } from 'react-router-dom';
 
 import './style.scss';
 import MenuDropDown from '../MenuDropDown';
 import menuItems  from '../../contants/menus';
 
 function Navbar(){
+    const location = useLocation();
+
+    let currentIndex = 0;
+    if(location.pathname==="/travel" ||
+        location.pathname==="/books" || 
+        location.pathname==="/programming" || 
+        location.pathname==="/academics") currentIndex=1;
+    else if(location.pathname==='/portfolio') currentIndex=2;
+    else if(location.pathname==='/blogs') currentIndex=3;
+    else if(location.pathname==='/contactme') currentIndex=4;
+
+
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const [navIndex,setNavIndex] = useState(0);
+    const [navIndex,setNavIndex] = useState(currentIndex);
     const [anchorEl,setAnchorEl] = useState();
     const [menuOpen,setMenuOpen] = useState(false);
 
