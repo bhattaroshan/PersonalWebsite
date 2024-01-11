@@ -41,15 +41,21 @@ function Navbar(){
         mouseEventEnabledEvent.detail.enabled = enabled;
         document.dispatchEvent(mouseEventEnabledEvent);
     }
-      
-    function handleMenuOpen(e,v){
+    
+    function handleClickOpen(e,v){
+        navigate(v.url);
+    }
+
+    function handleMenuOpen(e,v,i){
+        console.log("hello from hover");
         if(v.submenu!==undefined){
-            setMenuOpen(true);
+            setNavIndex(i);
             setAnchorEl(e.currentTarget);
-        }else{ //need to push to navigator
-            navigate(v.url);
-            setMenuOpen(false);
         }
+    }
+
+    function handleClose(){
+        setAnchorEl(null);
     }
 
     return (
@@ -60,7 +66,7 @@ function Navbar(){
                         {/* <Avatar>R</Avatar> */}
                     </Grid>
                     <Grid item sx={{display:{xs:'none',md:'flex'}}}>
-                        <Tabs indicatorColor="secondary" textColor="inherit" value={navIndex}
+                        {/* <Tabs indicatorColor="secondary" textColor="inherit" value={navIndex}
                               onChange={(e,v)=>setNavIndex(v)} >
                             {
                                 menuItems.map((value,index)=>{
@@ -72,7 +78,19 @@ function Navbar(){
                                             />
                                 })
                             }
-                        </Tabs>
+                        </Tabs> */}
+                        <Toolbar sx={{gap:4}}>
+                            {
+                                menuItems.map((value,index)=>{
+                                    return <Typography key={index} sx={{cursor:'pointer'}}
+                                        onClick={(e)=>handleClickOpen(e,value)}
+                                        onMouseOver={(e)=>handleMenuOpen(e,value,index)}
+                                    >
+                                            {value.name}
+                                        </Typography>
+                                })
+                            }
+                        </Toolbar>
                     </Grid>
                     <Grid item sx={{display:{xs:'flex',md:'none'}, alignItems:'center'}}>
                         <IconButton 
@@ -88,10 +106,11 @@ function Navbar(){
                 </Grid>
             </Toolbar>
 
-            <Menu id='menu' anchorEl={anchorEl} open={menuOpen} onClose={()=>setMenuOpen(false)} className="menu">
+            <Menu id='menu' anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={handleClose} className="menu"
+            MenuListProps={{onMouseLeave:handleClose}}>
                 {
                     menuItems[navIndex].submenu?.map((v,i)=>{
-                        return <MenuItem key={i} className="menuitem" onClick={(e)=>handleMenuOpen(e,v)}>
+                        return <MenuItem key={i} className="menuitem" onClick={(e)=>handleClickOpen(e,v)}>
                             <Typography>{v.name}</Typography>
                         </MenuItem>
                     })
@@ -99,6 +118,7 @@ function Navbar(){
             </Menu>
 
             <Drawer anchor="right"
+                    sx={{display:{xs:'block',md:'none'}}}
                     open={isDrawerOpen}
                     onClose={()=>{
                         //setExDrawerOpen(false);
