@@ -287,7 +287,8 @@ function HomePage() {
             }
 
             p.draw = () =>{
-                p.background(17,17,17);
+                // p.background(17,17,17);
+                p.background(17,24,39);
                     //p.translate(p.width/2,p.height/2)
                 system.run(); 
 

@@ -1,4 +1,9 @@
 
+import SchoolIcon from '@mui/icons-material/School';
+import CodeIcon from '@mui/icons-material/Code';
+import LibraryBooksIcon from '@mui/icons-material/LibraryBooks';
+import LocalAirportIcon from '@mui/icons-material/LocalAirport';
+
 const menuItems = [
     {
         name: 'HOME',
@@ -13,22 +18,22 @@ const menuItems = [
             {
                 name: 'ACADEMICS',
                 url: 'academics',
-                icon: '',
+                icon: SchoolIcon,
             },
             {
                 name: 'PROGRAMMING',
                 url: 'programming',
-                icon: '',
+                icon: CodeIcon,
             },
             {
                 name: 'BOOKS',
                 url: 'books',
-                icon: '',
+                icon: LibraryBooksIcon,
             },
             {
                 name: 'TRAVEL',
                 url: 'travel',
-                icon: '',
+                icon: LocalAirportIcon,
             },
         ]
     },

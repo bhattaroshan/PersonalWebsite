@@ -116,6 +116,7 @@ function ContactPage() {
                             inputRef={messageRef}
                 />
                 <Button variant='contained' sx={{height:'50px'}}
+                className='bg-gray-800'
                 onClick={handleMessageSend}>
                     <div style={{display:'flex',flexDirection:'row', gap:'10px'}}>
                         {

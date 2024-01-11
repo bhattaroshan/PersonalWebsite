@@ -7,13 +7,23 @@ import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import {useNavigate} from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import {set,reset} from '../../features/drawer/drawerSlicer';
+import { makeStyles } from "@material-ui/core";
 
 import './style.scss';
 import MenuDropDown from '../MenuDropDown';
 import menuItems  from '../../contants/menus';
 
+const useStyles = makeStyles(theme => ({
+    root: {
+      "& .MuiPaper-root": {
+        background: 'rgb(17,24,39)',
+        border: '1px solid rgb(100,100,100)',
+        borderRadius: '5px'
+      }
+    }
+  }));
 function Navbar(){
-
+    const classes = useStyles();
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const [navIndex,setNavIndex] = useState(0);
@@ -62,7 +72,7 @@ function Navbar(){
     }
 
     return (
-        <AppBar position="sticky" sx={{margin:0, padding:0}}>
+        <AppBar position="sticky" sx={{margin:0, padding:0}} className='bg-gray-900'>
             <Toolbar sx={{gap:4, justifyContent:'end'}}>
                     {
                         menuItems.map((value,index)=>{
@@ -84,11 +94,16 @@ function Navbar(){
                         </IconButton>
             </Toolbar>
 
-            <Menu id='menu' anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={handleClose} className="menu"
-            MenuListProps={{onMouseLeave:handleClose}}>
+            <Menu id='menu' anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={handleClose} 
+                  className={classes.root}
+                  MenuListProps={{onMouseLeave:handleClose}}>
                 {
                     menuItems[navIndex].submenu?.map((v,i)=>{
-                        return <MenuItem key={i} className="menuitem" onClick={(e)=>handleClickOpenClose(e,v)}>
+                        return <MenuItem key={i} 
+                            className="bg-gray-900 hover:bg-gray-800 hover:border-white text-white w-52
+                                      gap-4" 
+                            onClick={(e)=>handleClickOpenClose(e,v)}>
+                            <v.icon className='w-6 h-6'/>
                             <Typography>{v.name}</Typography>
                         </MenuItem>
                     })
@@ -99,14 +114,12 @@ function Navbar(){
                     sx={{display:{xs:'block',md:'none'}}}
                     open={isDrawerOpen}
                     onClose={()=>{
-                        //setExDrawerOpen(false);
                         dispatch(reset());
                         closeDrawer();
                     }}>
                         {
                             menuItems.map((value,index)=>{
                                 return <MenuDropDown value={value} key={index} closeDrawer={()=>{
-                                    //setExDrawerOpen(false);
                                     dispatch(reset());
                                     closeDrawer();
                                 }}/>
