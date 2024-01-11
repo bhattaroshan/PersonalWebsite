@@ -18,7 +18,6 @@ function Navbar(){
     const navigate = useNavigate();
     const [navIndex,setNavIndex] = useState(0);
     const [anchorEl,setAnchorEl] = useState();
-    const [menuOpen,setMenuOpen] = useState(false);
 
     const mouseEventEnabledEvent = new CustomEvent('drawerEnabled', { detail: { enabled: true } });
 
@@ -46,8 +45,12 @@ function Navbar(){
         navigate(v.url);
     }
 
+    function handleClickOpenClose(e,v){
+        navigate(v.url);
+        setAnchorEl(null);
+    }
+
     function handleMenuOpen(e,v,i){
-        console.log("hello from hover");
         if(v.submenu!==undefined){
             setNavIndex(i);
             setAnchorEl(e.currentTarget);
@@ -60,57 +63,32 @@ function Navbar(){
 
     return (
         <AppBar position="sticky" sx={{margin:0, padding:0}}>
-            <Toolbar>
-                <Grid container sx={{display:'flex'}}>
-                    <Grid item sx={{display:'flex', alignItems:'center', flexGrow:"1"}}>
-                        {/* <Avatar>R</Avatar> */}
-                    </Grid>
-                    <Grid item sx={{display:{xs:'none',md:'flex'}}}>
-                        {/* <Tabs indicatorColor="secondary" textColor="inherit" value={navIndex}
-                              onChange={(e,v)=>setNavIndex(v)} >
-                            {
-                                menuItems.map((value,index)=>{
-                                    return <Tab label={
-                                        <Typography>{value.name}</Typography>
-                                    }
-                                            onClick={(e)=>handleMenuOpen(e,value)} 
-                                            key={index}
-                                            />
-                                })
-                            }
-                        </Tabs> */}
-                        <Toolbar sx={{gap:4}}>
-                            {
-                                menuItems.map((value,index)=>{
-                                    return <Typography key={index} sx={{cursor:'pointer'}}
-                                        onClick={(e)=>handleClickOpen(e,value)}
-                                        onMouseOver={(e)=>handleMenuOpen(e,value,index)}
-                                    >
-                                            {value.name}
-                                        </Typography>
-                                })
-                            }
-                        </Toolbar>
-                    </Grid>
-                    <Grid item sx={{display:{xs:'flex',md:'none'}, alignItems:'center'}}>
+            <Toolbar sx={{gap:4, justifyContent:'end'}}>
+                    {
+                        menuItems.map((value,index)=>{
+                            return <Typography key={index} sx={{cursor:'pointer', textDecoration:navIndex===index?'underline':'none', textUnderlineOffset:'10px', display:{sm:'none', md:'block'}}}
+                                onClick={(e)=>handleClickOpen(e,value)}
+                                onMouseOver={(e)=>handleMenuOpen(e,value,index)}
+                            >
+                                    {value.name}
+                                </Typography>
+                        })
+                    }
                         <IconButton 
                             onClick={()=>{
                                 openDrawer();
-                                //setExDrawerOpen(true);
                                 dispatch(set());
                             }}
-                            sx={{color:"white"}}>
+                            sx={{color:"white", display:{sm:'block', md:'none'}}}>
                             <MenuIcon/>
                         </IconButton>
-                    </Grid>
-                </Grid>
             </Toolbar>
 
             <Menu id='menu' anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={handleClose} className="menu"
             MenuListProps={{onMouseLeave:handleClose}}>
                 {
                     menuItems[navIndex].submenu?.map((v,i)=>{
-                        return <MenuItem key={i} className="menuitem" onClick={(e)=>handleClickOpen(e,v)}>
+                        return <MenuItem key={i} className="menuitem" onClick={(e)=>handleClickOpenClose(e,v)}>
                             <Typography>{v.name}</Typography>
                         </MenuItem>
                     })
