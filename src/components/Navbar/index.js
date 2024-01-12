@@ -76,7 +76,9 @@ function Navbar(){
             <Toolbar sx={{gap:4, justifyContent:'end'}}>
                     {
                         menuItems.map((value,index)=>{
-                            return <Typography key={index} sx={{cursor:'pointer', textDecoration:navIndex===index?'underline':'none', textUnderlineOffset:'10px', display:{sm:'none', md:'block'}}}
+                            return <Typography key={index} 
+                            className={`hidden md:block cursor-pointer 
+                                        ${navIndex===index?'underline':'no-underline'} underline-offset-8`}
                                 onClick={(e)=>handleClickOpen(e,value)}
                                 onMouseOver={(e)=>handleMenuOpen(e,value,index)}
                             >
@@ -89,7 +91,7 @@ function Navbar(){
                                 openDrawer();
                                 dispatch(set());
                             }}
-                            sx={{color:"white", display:{sm:'block', md:'none'}}}>
+                            className='block md:hidden text-white'>
                             <MenuIcon/>
                         </IconButton>
             </Toolbar>
