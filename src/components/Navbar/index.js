@@ -105,7 +105,7 @@ function Navbar(){
                             className="bg-gray-900 hover:bg-gray-800 hover:border-white text-white w-52
                                       gap-4" 
                             onClick={(e)=>handleClickOpenClose(e,v)}>
-                            <v.icon className='w-6 h-6'/>
+                            <v.icon className='w-8 h-8 '/>
                             <Typography>{v.name}</Typography>
                         </MenuItem>
                     })
