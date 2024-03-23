@@ -12,6 +12,7 @@ import Thumbnail_Synthesizer from '../../assets/portfolio/thumbnail_synthesizer.
 import Thumbnail_GuitarTuner from '../../assets/portfolio/thumbnail_guitartuner.png';
 import Thumbnail_RBAudioConverter from '../../assets/portfolio/thumbnail_rbaudioconverter.jpeg';
 import Thumbnail_Adinath from '../../assets/portfolio/thumbnail_adinath.png';
+import Thumbnail_Crosshimalaya from '../../assets/portfolio/thumbnail_crosshimalaya.png';
 
 const contents = [
     {
@@ -44,6 +45,12 @@ const contents = [
       thumbnail: Thumbnail_Adinath,
       link: 'https://github.com/bhattaroshan/SchoolWebsite',
       demo: 'https://adinathschool.edu.np'
+    },
+    {
+      title:'Travel Website',
+      preface:'It\'s a webapp written in nextjs including both backend and frontend. DrizzleORM is used to connect with the postgresql database. The source is private as of now.',
+      thumbnail: Thumbnail_Crosshimalaya,
+      demo: 'https://crosshimalaya.vercel.app/'
     }
 ]
 
