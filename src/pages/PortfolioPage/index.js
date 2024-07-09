@@ -13,6 +13,7 @@ import Thumbnail_GuitarTuner from '../../assets/portfolio/thumbnail_guitartuner.
 import Thumbnail_RBAudioConverter from '../../assets/portfolio/thumbnail_rbaudioconverter.jpeg';
 import Thumbnail_Adinath from '../../assets/portfolio/thumbnail_adinath.png';
 import Thumbnail_Crosshimalaya from '../../assets/portfolio/thumbnail_crosshimalaya.png';
+import Thumbnail_NewsPortal from '../../assets/portfolio/thumbnail_newsportal.png';
 
 const contents = [
     {
@@ -51,6 +52,12 @@ const contents = [
       preface:'It\'s a webapp written in nextjs including both backend and frontend. DrizzleORM is used to connect with the postgresql database. The source is private as of now.',
       thumbnail: Thumbnail_Crosshimalaya,
       demo: 'https://crosshimalaya.vercel.app/'
+    },
+    {
+      title:'News Portal',
+      preface:'It\'s a webapp written in nextjs for FE and django for BE. The source is private as of now. The portal also consists of robust cms for layout management, theme management, menu management, article management, user registration and many more. Please send me a text from contact me page if you need cms credentials for exploration.',
+      thumbnail: Thumbnail_NewsPortal,
+      demo: 'https://news.roshanbhatta.com.np/'
     }
 ]
 
