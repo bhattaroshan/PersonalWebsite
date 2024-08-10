@@ -166,6 +166,26 @@ const travelPlaces = [
             latlong:[23.7807717,90.3368803], //Dhaka, india
             place: 'Dhaka, Bangladesh'
         },
+        {
+            latlong: [35.713365743164815,139.77234727976133], //Tokyo japan
+            place: 'Ueno Park, Tokyo'
+        },
+        {
+            latlong: [35.67642452122419, 139.69956340741044], //Meiji Jingu, japan
+            place: 'Meiju Jingu, Tokyo'
+        },
+        {
+            latlong: [35.659161078823516,139.7008381835107], //shibuya, Japan
+            place: 'Shibuya Crossing, Hachiko Square, Tokyo'
+        },
+        {
+            latlong: [34.66647672704367,135.43178231213523], //universal studio, osaka
+            place: 'Universal Studio, Osaka'
+        },
+        {
+            latlong: [34.6545361181831, 135.42912935234898], //
+            place: 'Osaka Aquarium Kaiyukan'
+        }
 ];
 
 export default travelPlaces;

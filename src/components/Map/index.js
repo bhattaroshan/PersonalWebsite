@@ -24,7 +24,7 @@ function Map() {
 
     const handleZoomEnd = (event) => {
         // const zoomLevel = event.target.getZoom();
-        // console.log('Zoom level:', zoomLevel);
+        console.log('Zoom level:', zoomLevel);
         setZoomLevel(event.target.getZoom());
         // Perform actions based on the zoom level change
         // ...
@@ -66,10 +66,10 @@ function Map() {
           :
           travelPlaces.map((v,i)=>{
                 
-            return <Circle key={i} center={v.latlong} pathOptions={{ fillColor: 'red',color: 'red' }} radius={8000}>
+            return <Circle key={i} center={v.latlong} pathOptions={{ fillColor: 'red',color: 'red' }} radius={(8000/(zoomLevel/(zoomLevel<=8?20:3)))}>
                     <Popup>
                         {v.place}
-                        <button className='border rounded p-2 m-2 hover:bg-blue-200 active:bg-blue-300'>OK</button>
+                        {/* <button className='border rounded p-2 m-2 hover:bg-blue-200 active:bg-blue-300'>OK</button> */}
                     </Popup>
                     </Circle>
 
