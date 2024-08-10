@@ -14,50 +14,90 @@ import Thumbnail_RBAudioConverter from '../../assets/portfolio/thumbnail_rbaudio
 import Thumbnail_Adinath from '../../assets/portfolio/thumbnail_adinath.png';
 import Thumbnail_Crosshimalaya from '../../assets/portfolio/thumbnail_crosshimalaya.png';
 import Thumbnail_NewsPortal from '../../assets/portfolio/thumbnail_newsportal.png';
+import Thumbnail_Makeymakey from '../../assets/portfolio/thumbnail_makeymakey.jpg'
 
 const contents = [
     {
         title:'Qt Sythesizer',
-        preface:'This is an app designed in Qt6 c++. It implements signal processing algorithms in time domain. It might be a great tool for people who want to experiment with frequency, harmonics. It could also be a tool for sound engineers to some extent.',
+        preface:<p className='text-justify font-light'>
+              This is an app designed in Qt6 c++. 
+              It implements signal processing algorithms in time domain. 
+              It might be a great tool for people who want to experiment with frequency, harmonics. 
+              It could also be a tool for sound engineers to some extent.
+            </p>,
         thumbnail: Thumbnail_Synthesizer,
         link: 'https://github.com/bhattaroshan/QtSynthesizer'
     },
     {
       title:'Nepali Calendar',
-      preface:'Calendar app is created in qml and c++. All the UI component is designed in qml and its backend is done in c++. Cloud side backend is designed in fastapi in Python. Since the app is written in qml in qt6, you can technically compile the source for any platform you wish and run the app.',
+      preface:<p className='text-justify font-light'>
+        Calendar app is created in qml and c++. 
+        All the UI component is designed in qml and its backend is done in c++. 
+        Cloud side backend is designed in fastapi in Python. 
+        Since the app is written in qml in qt6, you can technically compile the source for any platform you wish and run the app.
+        </p>,
       thumbnail: Thumbnail_NepaliCalendar,
       link: 'https://github.com/bhattaroshan/NepaliCalendar'
     },
     {
       title:'Guitar Tuner',
-      preface:'Guitar Tuner is built using qt6. This app makes use of portaudio to get access of microphone and sample its data. The CMakeLists.txt is not implemented in a standard way to import portaudio. CMake file must be modified to compile this app.',
+      preface:<p className='text-justify font-light'>
+        Guitar Tuner is built using qt6. 
+        This app makes use of portaudio to get access of microphone and sample its data. 
+        The CMakeLists.txt is not implemented in a standard way to import portaudio. CMake file must be modified to compile this app.
+      </p>,
       thumbnail: Thumbnail_GuitarTuner,
       link: 'https://github.com/bhattaroshan/Qt6GuitarTuner'
     },
     {
       title:'RB Audio Converter',
-      preface:'It\'s a software written for windows in C++ without any UI framework. It uses lame.exe and bass.dll to encode and decode different file formats. It was written in those days when functional softwares were priotized over its looks and user experience.',
+      preface:<p className='text-justify font-light'>
+        Its a software written for windows in C++ without any UI framework. 
+        It uses lame.exe and bass.dll to encode and decode different file formats. 
+        It was written in those days when functional softwares were priotized over its looks and user experience.
+        </p>,
       thumbnail: Thumbnail_RBAudioConverter,
       link: 'https://github.com/bhattaroshan/Audio-Converter'
     },
     {
       title:'School Website 1',
-      preface:'It\'s a webapp written in reactjs. The design is done with MUI.',
+      preface:<p className='text-justify font-light'>
+        Its a webapp written in reactjs. The design is done with MUI.
+      </p>,
       thumbnail: Thumbnail_Adinath,
       link: 'https://github.com/bhattaroshan/SchoolWebsite',
       demo: 'https://adinathschool.edu.np'
     },
     {
       title:'Travel Website',
-      preface:'It\'s a webapp written in nextjs including both backend and frontend. DrizzleORM is used to connect with the postgresql database. The source is private as of now.',
+      preface:<p className='text-justify font-light'>
+            It's a webapp written in nextjs including both backend and frontend. 
+            DrizzleORM is used to connect with the postgresql database. The source is private as of now.
+        </p>,
       thumbnail: Thumbnail_Crosshimalaya,
       demo: 'https://crosshimalaya.vercel.app/'
     },
     {
       title:'News Portal',
-      preface:'It\'s a webapp written in nextjs for FE and django for BE. The source is private as of now. The portal also consists of robust cms for layout management, theme management, menu management, article management, user registration and many more. Please send me a text from contact me page if you need cms credentials for exploration.',
+      preface:<p className='text-justify font-light'>
+              It's a webapp written in nextjs for FE and django for BE. 
+                The source is private as of now. The portal also consists of robust cms for layout management, 
+                theme management, menu management, article management, user registration and many more. 
+                Please send me a text from <a href='/contactme' className='text-blue-600 font-medium'>contact me page {" "}</a>if you need cms credentials for exploration.
+      </p>,
       thumbnail: Thumbnail_NewsPortal,
       demo: 'https://news.roshanbhatta.com.np/'
+    },
+    {
+      title: 'Makey Makey Clone',
+      preface:<p className='text-justify font-light'>
+                Makey makey is a tinkering hardware made for students to learn about conductivity by MIT graduates. It's cost is somewhere around $60. 
+                I used comparatively cheaper microcontroller and re-wrote everything completely from scratch to enable all the features using low-resource hardware. 
+                I was able to build the hardware in just $4. I also tested the hardware in my classes. 
+                The firmware includes code for capacitive sensing, moving average filter and HID keyboard and mouse interface.
+              </p>,
+      thumbnail: Thumbnail_Makeymakey,
+      link: 'https://github.com/bhattaroshan/MakeyMakeyClone'
     }
 ]
 

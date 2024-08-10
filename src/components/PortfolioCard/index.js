@@ -26,7 +26,7 @@ export default function PortfolioCard({content}) {
         <Box sx={{display:'flex', flexDirection:'column'}}>
           <CardContent>
             <Typography sx={{fontSize:'30px', fontWeight:'500'}}>{content.title}</Typography>
-            <Typography sx={{fontWeight:'200', marginTop:'10px'}}>{content.preface}</Typography>
+              {content.preface}
           </CardContent>
           <CardActions sx={{justifyContent:'center', marginBottom:'15px'}}>
             <Button variant='contained' color='primary'>Learn More</Button>
