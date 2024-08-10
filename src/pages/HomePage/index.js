@@ -259,7 +259,7 @@ function HomePage() {
                   }
 
             p.setup = () =>{
-                p.createCanvas(window.innerWidth,window.innerHeight*0.92).parent(sketchRef.current);
+                p.createCanvas(window.innerWidth,window.innerHeight*(window.innerWidth>400?0.918:0.935)).parent(sketchRef.current);
                 for (let i = 0; i < numNodes; i++) {
                     let x = 0;
                     let y = 0;
@@ -425,10 +425,8 @@ function HomePage() {
     
 
     return (
-        <div ref={sketchRef}>
-
-        </div>
-    )
+            <div ref={sketchRef} />
+        )
 }
 
 export default HomePage;
