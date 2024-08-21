@@ -15,6 +15,7 @@ import Thumbnail_Adinath from '../../assets/portfolio/thumbnail_adinath.png';
 import Thumbnail_Crosshimalaya from '../../assets/portfolio/thumbnail_crosshimalaya.png';
 import Thumbnail_NewsPortal from '../../assets/portfolio/thumbnail_newsportal.png';
 import Thumbnail_Makeymakey from '../../assets/portfolio/thumbnail_makeymakey.jpg'
+import Thumbnail_Videochat from '../../assets/portfolio/thumbnail_videochat.png'
 
 const contents = [
     {
@@ -98,6 +99,16 @@ const contents = [
               </p>,
       thumbnail: Thumbnail_Makeymakey,
       link: 'https://github.com/bhattaroshan/MakeyMakeyClone'
+    },
+    {
+      title: 'Video Chat App',
+      preface: <p className='text-justify font-light'>
+          It's a video calling chat app. There are no third-party services used to build the app. 
+          The STUN and TURN servers are self hosted. Adding in extra features in video is just the logical part which 
+          can be done as per the feature requirement. I've only added a feature to raise a hand for now. 
+      </p>,
+      thumbnail: Thumbnail_Videochat,
+       demo: 'https://abcvideochat.vercel.app'
     }
 ]
 
