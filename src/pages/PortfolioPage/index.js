@@ -16,6 +16,8 @@ import Thumbnail_Crosshimalaya from '../../assets/portfolio/thumbnail_crosshimal
 import Thumbnail_NewsPortal from '../../assets/portfolio/thumbnail_newsportal.png';
 import Thumbnail_Makeymakey from '../../assets/portfolio/thumbnail_makeymakey.jpg'
 import Thumbnail_Videochat from '../../assets/portfolio/thumbnail_videochat.png'
+import Thumbnail_AudioPlayer from '../../assets/portfolio/thumbnail_audioplayer.jpg'
+import Thumbnail_Waterlevel from '../../assets/portfolio/thumbnail_waterlevel.jpg'
 
 const contents = [
     {
@@ -109,7 +111,24 @@ const contents = [
       </p>,
       thumbnail: Thumbnail_Videochat,
        demo: 'https://abcvideochat.vercel.app'
-    }
+    },
+    {
+        title: '8-Bit AudioPlayer (Hardware)',
+        preface: <p className='text-justify font-light'>
+           It's a hardware project done using 8-bit ATMega8 microcontroller. It's written in c. The project is capable of reading RAW audio files from FAT32 SD cards and play PCM audio files of 44.1Khz 8-bit signals. 
+        </p>,
+        thumbnail: Thumbnail_AudioPlayer,
+         link: 'https://github.com/bhattaroshan/8-bit-AudioPlayer'
+    },
+    {
+      title: 'Water Level Detector (Hardware)',
+      preface: <p className='text-justify font-light'>
+         It's a hardware project written in C. The project uses 16bit ATMega 32 microcontroller to detect the two levels in the water tank. The hardware also has other abilities to turn other electrical suppliences via relay.
+      </p>,
+      thumbnail: Thumbnail_Waterlevel,
+       link: 'https://github.com/bhattaroshan/Water-Level-Detector'
+  },
+  
 ]
 
 function PortfolioPage() {
