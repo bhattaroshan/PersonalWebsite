@@ -19,6 +19,7 @@ import Thumbnail_Videochat from '../../assets/portfolio/thumbnail_videochat.png'
 import Thumbnail_AudioPlayer from '../../assets/portfolio/thumbnail_audioplayer.jpg';
 import Thumbnail_Waterlevel from '../../assets/portfolio/thumbnail_waterlevel.jpg';
 import Thumbnail_Facebookpage from '../../assets/portfolio/thumbnail_fbpage.jpg';
+import Thumbnail_Dataoversound from '../../assets/portfolio/thumbnail_dataoversound.jpeg';
 
 const contents = [
     {
@@ -137,7 +138,14 @@ const contents = [
       thumbnail: Thumbnail_Facebookpage,
        demo: 'https://www.facebook.com/EmbeddedIoTProgramming'
     },
-  
+    {
+      title: 'Data Over Sound C++',
+      preface: <p className='text-justify font-light'>
+        It's an app to send text messages via speaker as a 17khz sound signal. It uses cooley-tuckey fft to decode the sound back via microphone. SDL Audio has been used to access speaker and microphone for cross-platform compatibility. I have also tried to implement reed-solomon for error correction but I don't think I've implemented it. Too lazy to go through the code and check it out right now!
+      </p>,
+      thumbnail: Thumbnail_Dataoversound,
+       link: 'https://github.com/bhattaroshan/DataOverSound'
+    },
 ]
 
 function PortfolioPage() {
