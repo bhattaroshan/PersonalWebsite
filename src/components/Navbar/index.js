@@ -38,12 +38,22 @@ function Navbar(){
         if(window.location.pathname==="/travel" ||
             window.location.pathname==="/books" || 
             window.location.pathname==="/programming" || 
-            window.location.pathname==="/academics") currentIndex=1;
-        else if(window.location.pathname==='/portfolio') currentIndex=2;
-        else if(window.location.pathname==='/blogs') currentIndex=3;
-        else if(window.location.pathname==='/contactme') currentIndex=4;
-        else currentIndex=0;
+            window.location.pathname==="/academics")
+            currentIndex=1;
+        else if(window.location.pathname==='/language' ||
+                window.location.pathname==='/music')
+            currentIndex = 2;
+        else if(window.location.pathname==='/portfolio') 
+            currentIndex=3;
+        else if(window.location.pathname==='/blogs') 
+            currentIndex=4;
+        else if(window.location.pathname==='/contactme') 
+            currentIndex=5;
+        else 
+            currentIndex=0;
+
         setNavIndex(currentIndex);
+
     },[window.location.pathname])
 
     function setDrawerEnabled(enabled) {

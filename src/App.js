@@ -10,6 +10,8 @@ import AcademicsPage from './pages/AcademicsPage';
 import ProgrammingPage from './pages/ProgrammingPage';
 import ContactPage from './pages/ContactPage';
 import LanguagePage from './pages/LanguagePage';
+import MusicPage from './pages/MusicPage';
+import BlogsPage from './pages/BlogsPage';
 
 const theme = createTheme({
   palette:{
@@ -39,6 +41,8 @@ function App() {
           <Route path="programming" element={<ProgrammingPage/>}/>
           <Route path="contactme" element={<ContactPage/>}/>
           <Route path="language" element={<LanguagePage/>}/>
+          <Route path="music" element={<MusicPage/>}/>
+          <Route path="blogs" element={<BlogsPage/>}/>
         </Routes>
       </ThemeProvider>
     </BrowserRouter>

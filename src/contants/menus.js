@@ -3,6 +3,7 @@ import SchoolIcon from '@mui/icons-material/School';
 import CodeIcon from '@mui/icons-material/Code';
 import LibraryBooksIcon from '@mui/icons-material/LibraryBooks';
 import LocalAirportIcon from '@mui/icons-material/LocalAirport';
+import MusicNoteIcon from '@mui/icons-material/MusicNote';
 
 const menuItems = [
     {
@@ -34,6 +35,23 @@ const menuItems = [
                 name: 'TRAVEL',
                 url: 'travel',
                 icon: LocalAirportIcon,
+            },
+        ]
+    },
+    {
+        name: 'SKILLS',
+        url: '',
+        icon:'',
+        submenu:[
+            {
+                name: 'LANGUAGES',
+                url: 'language',
+                icon: CodeIcon,
+            },
+            {
+                name: 'MUSIC',
+                url: 'music',
+                icon: MusicNoteIcon,
             },
         ]
     },
