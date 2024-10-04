@@ -23,22 +23,21 @@ export default function PortfolioCard({content}) {
         component="img"
         image= {thumbnail}
         /> 
-        <Box sx={{display:'flex', flexDirection:'column'}}>
-          <CardContent>
-            <Typography sx={{fontSize:'30px', fontWeight:'500'}}>{content.title}</Typography>
-              {content.preface}
-          </CardContent>
-          <CardActions sx={{justifyContent:'center', marginBottom:'15px'}}>
-            <Button variant='contained' color='primary'>Learn More</Button>
-            {
-              link &&  
-              <Button variant='contained' color='primary' onClick={handleLink}>Source Code</Button>
-            }
-            {
-              demo &&  <Button variant='contained' color='primary' onClick={handleDemo}>Demo</Button> 
-            }
-          </CardActions>
-        </Box>
+          <div className='flex flex-col p-4 justify-between h-full'>
+            <div>
+              <p className='text-2xl font-bold my-4'>{content.title}</p>
+              <p>{content.preface}</p>
+            </div>
+            <div className='flex flex-row gap-4 justify-center my-4'>
+              {
+                link &&  
+                <Button className="w-36" variant='contained' color='primary' onClick={handleLink}>Source Code</Button>
+              }
+              {
+                demo &&  <Button className="w-36" variant='contained' color='primary' onClick={handleDemo}>Demo</Button> 
+              }
+            </div>
+          </div>
       </Card>
 
   );

@@ -14,10 +14,11 @@ import Thumbnail_RBAudioConverter from '../../assets/portfolio/thumbnail_rbaudio
 import Thumbnail_Adinath from '../../assets/portfolio/thumbnail_adinath.png';
 import Thumbnail_Crosshimalaya from '../../assets/portfolio/thumbnail_crosshimalaya.png';
 import Thumbnail_NewsPortal from '../../assets/portfolio/thumbnail_newsportal.png';
-import Thumbnail_Makeymakey from '../../assets/portfolio/thumbnail_makeymakey.jpg'
-import Thumbnail_Videochat from '../../assets/portfolio/thumbnail_videochat.png'
-import Thumbnail_AudioPlayer from '../../assets/portfolio/thumbnail_audioplayer.jpg'
-import Thumbnail_Waterlevel from '../../assets/portfolio/thumbnail_waterlevel.jpg'
+import Thumbnail_Makeymakey from '../../assets/portfolio/thumbnail_makeymakey.jpg';
+import Thumbnail_Videochat from '../../assets/portfolio/thumbnail_videochat.png';
+import Thumbnail_AudioPlayer from '../../assets/portfolio/thumbnail_audioplayer.jpg';
+import Thumbnail_Waterlevel from '../../assets/portfolio/thumbnail_waterlevel.jpg';
+import Thumbnail_Facebookpage from '../../assets/portfolio/thumbnail_fbpage.jpg';
 
 const contents = [
     {
@@ -127,7 +128,15 @@ const contents = [
       </p>,
       thumbnail: Thumbnail_Waterlevel,
        link: 'https://github.com/bhattaroshan/Water-Level-Detector'
-  },
+    },
+    {
+      title: 'Embedded Programming Facebook Page',
+      preface: <p className='text-justify font-light'>
+         It's a facebook page I created probably 10-12 years ago to share tips and tricks on C/C++ and embedded programming. I was quite active until 2017. The page has more then <b>5K community members</b>. However I haven't been active since then.
+      </p>,
+      thumbnail: Thumbnail_Facebookpage,
+       demo: 'https://www.facebook.com/EmbeddedIoTProgramming'
+    },
   
 ]
 
