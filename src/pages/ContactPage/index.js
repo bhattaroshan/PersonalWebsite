@@ -20,7 +20,8 @@ function ContactPage() {
         const emailVars = {
             from_name:nameRef.current.value,
             from_email:emailRef.current.value,
-            message:messageRef.current.value
+            message:messageRef.current.value,
+            to_email: 'roshan@teachfornepal.org'
         }
 
         try{
